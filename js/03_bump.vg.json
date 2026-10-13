@@ -1,0 +1,420 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 600,
+  "height": 330,
+  "data": {
+    "url": "data/ausplay_activity_trend_2016_2025.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "year": "number",
+        "participation_pct": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "window": [
+        {
+          "op": "row_number",
+          "as": "rank"
+        }
+      ],
+      "sort": [
+        {
+          "field": "participation_pct",
+          "order": "descending"
+        }
+      ],
+      "groupby": [
+        "year"
+      ]
+    },
+    {
+      "calculate": "toString(datum.year)",
+      "as": "yr"
+    },
+    {
+      "calculate": "datum.year < 2023 ? 'phone' : 'online'",
+      "as": "period"
+    },
+    {
+      "calculate": "datum.activity == 'Running and jogging' && datum.year < 2023 ? 'Athletics, track and field (includes jogging and running)' : datum.activity",
+      "as": "recorded_as"
+    },
+    {
+      "calculate": "indexof([\"Walking for exercise\", \"Bushwalking\", \"Gym and fitness\", \"Pilates\"], datum.activity) >= 0 ? datum.setting : 'Other activities'",
+      "as": "group"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "yr",
+      "type": "ordinal",
+      "title": null,
+      "scale": {
+        "domain": [
+          "2016",
+          "2017",
+          "2018",
+          "2019",
+          "2020",
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025"
+        ],
+        "padding": 0.2
+      },
+      "axis": {
+        "labelAngle": 0,
+        "domain": false,
+        "ticks": false,
+        "labelExpr": "datum.label == '2023' ? '' : datum.label"
+      }
+    },
+    "y": {
+      "field": "rank",
+      "type": "quantitative",
+      "title": "Rank (1 = most popular)",
+      "scale": {
+        "domain": [
+          1,
+          15
+        ],
+        "reverse": true,
+        "nice": false
+      },
+      "axis": {
+        "values": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "domain": false,
+        "ticks": false,
+        "grid": false,
+        "labelExpr": "datum.value + (datum.value == 1 ? 'st' : datum.value == 2 ? 'nd' : datum.value == 3 ? 'rd' : 'th')"
+      }
+    }
+  },
+  "layer": [
+    {
+      "data": {
+        "values": [
+          {}
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "strokeDash": [
+          3,
+          3
+        ],
+        "color": "#c8c8c8"
+      },
+      "encoding": {
+        "x": {
+          "datum": "2023"
+        },
+        "y": {
+          "value": 0
+        },
+        "y2": {
+          "value": 330
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {}
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "bottom",
+        "fontSize": 11,
+        "color": "#5b6770",
+        "dy": -6
+      },
+      "encoding": {
+        "x": {
+          "datum": "2023"
+        },
+        "y": {
+          "value": 0
+        },
+        "text": {
+          "value": [
+            "Survey method",
+            "changed"
+          ]
+        }
+      }
+    },
+    {
+      "params": [
+        {
+          "name": "pick",
+          "select": {
+            "type": "point",
+            "fields": [
+              "activity"
+            ],
+            "on": "pointerover",
+            "clear": "pointerout"
+          }
+        }
+      ],
+      "mark": {
+        "type": "line",
+        "interpolate": "linear"
+      },
+      "encoding": {
+        "detail": [
+          {
+            "field": "activity"
+          },
+          {
+            "field": "period"
+          }
+        ],
+        "color": {
+          "field": "group",
+          "type": "nominal",
+          "legend": null,
+          "scale": {
+            "domain": [
+              "Mostly outdoor",
+              "Mostly indoor",
+              "Other activities"
+            ],
+            "range": [
+              "#1b9e77",
+              "#7570b3",
+              "#c8c8c8"
+            ]
+          }
+        },
+        "strokeWidth": {
+          "condition": {
+            "test": "datum.group != 'Other activities'",
+            "value": 3.5
+          },
+          "value": 1.5
+        },
+        "opacity": {
+          "condition": {
+            "param": "pick",
+            "value": 1,
+            "empty": true
+          },
+          "value": 0.25
+        },
+        "tooltip": [
+          {
+            "field": "activity",
+            "title": "Activity"
+          },
+          {
+            "field": "year",
+            "title": "Year"
+          },
+          {
+            "field": "rank",
+            "title": "Rank"
+          },
+          {
+            "field": "participation_pct",
+            "title": "Share of adults (%)"
+          },
+          {
+            "field": "recorded_as",
+            "title": "Recorded in AusPlay as"
+          },
+          {
+            "field": "survey_method",
+            "title": "Survey"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 40,
+        "opacity": 1
+      },
+      "encoding": {
+        "color": {
+          "field": "group",
+          "type": "nominal",
+          "legend": null,
+          "scale": {
+            "domain": [
+              "Mostly outdoor",
+              "Mostly indoor",
+              "Other activities"
+            ],
+            "range": [
+              "#1b9e77",
+              "#7570b3",
+              "#c8c8c8"
+            ]
+          }
+        },
+        "size": {
+          "condition": {
+            "test": "datum.group != 'Other activities'",
+            "value": 55
+          },
+          "value": 22
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year == 2025 && datum.group != 'Other activities'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 10,
+        "fontSize": 12,
+        "fontWeight": 700
+      },
+      "encoding": {
+        "text": {
+          "field": "activity"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.group == 'Mostly outdoor'",
+            "value": "#1b9e77"
+          },
+          "value": "#7570b3"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "yr": "2019",
+            "rank": 12
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": -4,
+        "dy": -11,
+        "fontSize": 11,
+        "fontStyle": "italic",
+        "color": "#7570b3"
+      },
+      "encoding": {
+        "x": {
+          "field": "yr",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "rank",
+          "type": "quantitative"
+        },
+        "text": {
+          "value": "Pilates: 15th in 2016, 7th in 2025"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year == 2025 && datum.group == 'Other activities'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 10,
+        "fontSize": 12,
+        "color": "#8a9096"
+      },
+      "encoding": {
+        "text": {
+          "field": "activity"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "#ffffff",
+    "font": "Source Sans 3, Source Sans Pro, Helvetica, Arial, sans-serif",
+    "padding": {
+      "left": 8,
+      "right": 70,
+      "top": 8,
+      "bottom": 8
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 17,
+      "fontWeight": 700,
+      "color": "#1f2a30",
+      "offset": 16,
+      "subtitleFontSize": 14,
+      "subtitleFontWeight": 400,
+      "subtitleColor": "#5b6770",
+      "subtitlePadding": 8
+    },
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 11,
+      "labelColor": "#5b6770",
+      "titleFontSize": 12,
+      "titleFontWeight": 600,
+      "titleColor": "#5b6770",
+      "domainColor": "#c8c8c8",
+      "tickColor": "#c8c8c8",
+      "grid": false
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "labelColor": "#5b6770",
+      "titleFontSize": 12,
+      "titleFontWeight": 600,
+      "titleColor": "#5b6770"
+    },
+    "text": {
+      "font": "Source Sans 3, Source Sans Pro, Helvetica, Arial, sans-serif",
+      "color": "#1f2a30",
+      "fontSize": 12
+    },
+    "header": {
+      "labelFontSize": 12,
+      "labelColor": "#1f2a30"
+    }
+  },
+  "description": "Walking has been the top activity every year from 2016 to 2025"
+}

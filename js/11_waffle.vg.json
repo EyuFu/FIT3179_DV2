@@ -1,0 +1,261 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 180,
+  "height": 180,
+  "data": {
+    "url": "data/ausplay2025_frequency.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "order": "number",
+        "pct": "number",
+        "squares": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "calculate": "sequence(1, datum.squares + 1)",
+      "as": "unit"
+    },
+    {
+      "flatten": [
+        "unit"
+      ]
+    },
+    {
+      "window": [
+        {
+          "op": "row_number",
+          "as": "cell"
+        }
+      ],
+      "sort": [
+        {
+          "field": "order"
+        },
+        {
+          "field": "unit"
+        }
+      ]
+    },
+    {
+      "calculate": "(datum.cell - 1) % 10",
+      "as": "col"
+    },
+    {
+      "calculate": "floor((datum.cell - 1) / 10)",
+      "as": "row"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "cornerRadius": 2
+      },
+      "encoding": {
+        "x": {
+          "field": "col",
+          "type": "ordinal",
+          "axis": null,
+          "scale": {
+            "paddingInner": 0.18
+          }
+        },
+        "y": {
+          "field": "row",
+          "type": "ordinal",
+          "axis": null,
+          "scale": {
+            "paddingInner": 0.18
+          }
+        },
+        "color": {
+          "field": "frequency",
+          "type": "nominal",
+          "legend": null,
+          "scale": {
+            "domain": [
+              "3 or more times a week",
+              "Once or twice a week",
+              "Less than once a week",
+              "Not active in the past year"
+            ],
+            "range": [
+              "#1b9e77",
+              "#8a9096",
+              "#bdbdbd",
+              "#e3e1dc"
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "frequency",
+            "title": "How often"
+          },
+          {
+            "field": "pct",
+            "title": "Share of adults (%)"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.order == 1 && datum.unit == 1"
+        },
+        {
+          "calculate": "format(datum.pct, '.0f') + '%  ' + datum.frequency",
+          "as": "lab"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "x": 188,
+        "y": 44,
+        "fontSize": 12,
+        "fontWeight": 700,
+        "color": "#1b9e77"
+      },
+      "encoding": {
+        "text": {
+          "field": "lab"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.order == 2 && datum.unit == 1"
+        },
+        {
+          "calculate": "format(datum.pct, '.0f') + '%  ' + datum.frequency",
+          "as": "lab"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "x": 188,
+        "y": 103,
+        "fontSize": 12,
+        "fontWeight": 400,
+        "color": "#5b6770"
+      },
+      "encoding": {
+        "text": {
+          "field": "lab"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.order == 3 && datum.unit == 1"
+        },
+        {
+          "calculate": "format(datum.pct, '.0f') + '%  ' + datum.frequency",
+          "as": "lab"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "x": 188,
+        "y": 136,
+        "fontSize": 12,
+        "fontWeight": 400,
+        "color": "#5b6770"
+      },
+      "encoding": {
+        "text": {
+          "field": "lab"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.order == 4 && datum.unit == 1"
+        },
+        {
+          "calculate": "format(datum.pct, '.0f') + '%  ' + datum.frequency",
+          "as": "lab"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "x": 188,
+        "y": 169,
+        "fontSize": 12,
+        "fontWeight": 400,
+        "color": "#5b6770"
+      },
+      "encoding": {
+        "text": {
+          "field": "lab"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "#ffffff",
+    "font": "Source Sans 3, Source Sans Pro, Helvetica, Arial, sans-serif",
+    "padding": {
+      "left": 4,
+      "right": 30,
+      "top": 8,
+      "bottom": 8
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 17,
+      "fontWeight": 700,
+      "color": "#1f2a30",
+      "offset": 16,
+      "subtitleFontSize": 14,
+      "subtitleFontWeight": 400,
+      "subtitleColor": "#5b6770",
+      "subtitlePadding": 8
+    },
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 11,
+      "labelColor": "#5b6770",
+      "titleFontSize": 12,
+      "titleFontWeight": 600,
+      "titleColor": "#5b6770",
+      "domainColor": "#c8c8c8",
+      "tickColor": "#c8c8c8",
+      "grid": false
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "labelColor": "#5b6770",
+      "titleFontSize": 12,
+      "titleFontWeight": 600,
+      "titleColor": "#5b6770"
+    },
+    "text": {
+      "font": "Source Sans 3, Source Sans Pro, Helvetica, Arial, sans-serif",
+      "color": "#1f2a30",
+      "fontSize": 12
+    },
+    "header": {
+      "labelFontSize": 12,
+      "labelColor": "#1f2a30"
+    }
+  },
+  "description": "Half of all adults are active three or more times a week"
+}

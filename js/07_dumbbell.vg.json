@@ -1,0 +1,378 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 380,
+  "params": [
+    {
+      "name": "area_pick",
+      "value": "Tasmania",
+      "bind": {
+        "input": "select",
+        "options": [
+          "New South Wales",
+          "Victoria",
+          "Queensland",
+          "South Australia",
+          "Western Australia",
+          "Tasmania",
+          "Northern Territory",
+          "Australian Capital Territory"
+        ],
+        "name": "State or territory: "
+      }
+    }
+  ],
+  "data": {
+    "url": "data/ausplay2025_activity_by_state.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "pct": "number",
+        "axis": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.area == area_pick || datum.area == 'Australia'"
+    },
+    {
+      "calculate": "datum.area == 'Australia' ? 'Australia' : 'State'",
+      "as": "who"
+    },
+    {
+      "pivot": "who",
+      "value": "pct",
+      "groupby": [
+        "activity"
+      ]
+    },
+    {
+      "calculate": "area_pick",
+      "as": "state_name"
+    },
+    {
+      "calculate": "datum.State - datum.Australia",
+      "as": "gap"
+    },
+    {
+      "calculate": "max(datum.State, datum.Australia)",
+      "as": "right_end"
+    }
+  ],
+  "encoding": {
+    "y": {
+      "field": "activity",
+      "type": "nominal",
+      "sort": [
+        "Walking for exercise",
+        "Gym and fitness",
+        "Bushwalking",
+        "Running and jogging",
+        "Swimming",
+        "Cycling"
+      ],
+      "title": null,
+      "axis": {
+        "labelFontSize": 11,
+        "labelColor": "#1f2a30",
+        "domain": false,
+        "ticks": false,
+        "labelPadding": 8
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#c8c8c8",
+        "strokeWidth": 3
+      },
+      "encoding": {
+        "x": {
+          "field": "Australia",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              72
+            ]
+          },
+          "axis": {
+            "title": "Share of adults (%)",
+            "values": [
+              0,
+              20,
+              40,
+              60
+            ],
+            "grid": false,
+            "domain": false,
+            "ticks": false
+          }
+        },
+        "x2": {
+          "field": "State"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 130,
+        "opacity": 1,
+        "color": "#8a9096"
+      },
+      "encoding": {
+        "x": {
+          "field": "Australia",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "activity",
+            "title": "Activity"
+          },
+          {
+            "field": "Australia",
+            "title": "Australia (%)"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 130,
+        "opacity": 1,
+        "color": "#1f2a30"
+      },
+      "encoding": {
+        "x": {
+          "field": "State",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "activity",
+            "title": "Activity"
+          },
+          {
+            "field": "state_name",
+            "title": "State or territory"
+          },
+          {
+            "field": "State",
+            "title": "Share of adults (%)"
+          },
+          {
+            "field": "Australia",
+            "title": "Australia (%)"
+          },
+          {
+            "field": "gap",
+            "title": "Difference (percentage points)",
+            "format": "+.1f"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "calculate": "format(datum.State, '.0f') + '%'",
+          "as": "lab"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 12,
+        "fontSize": 12,
+        "fontWeight": 700,
+        "color": "#1f2a30"
+      },
+      "encoding": {
+        "x": {
+          "field": "right_end",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "lab"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.activity == 'Walking for exercise' && (datum.State >= datum.Australia)"
+        },
+        {
+          "calculate": "datum.state_name",
+          "as": "lab"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "bottom",
+        "dy": -10,
+        "fontSize": 12,
+        "fontWeight": 700,
+        "color": "#1f2a30"
+      },
+      "encoding": {
+        "x": {
+          "field": "State",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "lab"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.activity == 'Walking for exercise' && (datum.State >= datum.Australia)"
+        },
+        {
+          "calculate": "'Australia'",
+          "as": "lab"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "bottom",
+        "dy": -10,
+        "fontSize": 12,
+        "fontWeight": 400,
+        "color": "#8a9096"
+      },
+      "encoding": {
+        "x": {
+          "field": "Australia",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "lab"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.activity == 'Walking for exercise' && (datum.State < datum.Australia)"
+        },
+        {
+          "calculate": "datum.state_name",
+          "as": "lab"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "bottom",
+        "dy": -10,
+        "fontSize": 12,
+        "fontWeight": 700,
+        "color": "#1f2a30"
+      },
+      "encoding": {
+        "x": {
+          "field": "State",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "lab"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.activity == 'Walking for exercise' && (datum.State < datum.Australia)"
+        },
+        {
+          "calculate": "'Australia'",
+          "as": "lab"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "bottom",
+        "dy": -10,
+        "fontSize": 12,
+        "fontWeight": 400,
+        "color": "#8a9096"
+      },
+      "encoding": {
+        "x": {
+          "field": "Australia",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "lab"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "#ffffff",
+    "font": "Source Sans 3, Source Sans Pro, Helvetica, Arial, sans-serif",
+    "padding": {
+      "left": 8,
+      "right": 12,
+      "top": 8,
+      "bottom": 8
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 17,
+      "fontWeight": 700,
+      "color": "#1f2a30",
+      "offset": 16,
+      "subtitleFontSize": 14,
+      "subtitleFontWeight": 400,
+      "subtitleColor": "#5b6770",
+      "subtitlePadding": 8
+    },
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 11,
+      "labelColor": "#5b6770",
+      "titleFontSize": 12,
+      "titleFontWeight": 600,
+      "titleColor": "#5b6770",
+      "domainColor": "#c8c8c8",
+      "tickColor": "#c8c8c8",
+      "grid": false
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "labelColor": "#5b6770",
+      "titleFontSize": 12,
+      "titleFontWeight": 600,
+      "titleColor": "#5b6770"
+    },
+    "text": {
+      "font": "Source Sans 3, Source Sans Pro, Helvetica, Arial, sans-serif",
+      "color": "#1f2a30",
+      "fontSize": 12
+    },
+    "header": {
+      "labelFontSize": 12,
+      "labelColor": "#1f2a30"
+    }
+  },
+  "description": "How does your state's exercise mix compare with Australia?",
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding"
+  }
+}

@@ -1,0 +1,345 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 780,
+  "height": 300,
+  "data": {
+    "url": "data/ausplay2025_motivations.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "pct": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.group == 'All adults' && datum.age != 'All ages'"
+    },
+    {
+      "filter": {
+        "field": "motivation",
+        "oneOf": [
+          "Physical health and fitness",
+          "Fun and enjoyment",
+          "Weight control",
+          "Being outdoors in nature",
+          "Social reasons",
+          "Mental health"
+        ]
+      }
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "min",
+          "field": "pct",
+          "as": "axis_min"
+        },
+        {
+          "op": "max",
+          "field": "pct",
+          "as": "axis_max"
+        }
+      ],
+      "groupby": [
+        "motivation"
+      ]
+    },
+    {
+      "calculate": "(datum.pct - datum.axis_min) / (datum.axis_max - datum.axis_min)",
+      "as": "position"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "motivation",
+      "type": "nominal",
+      "sort": [
+        "Physical health and fitness",
+        "Fun and enjoyment",
+        "Weight control",
+        "Being outdoors in nature",
+        "Social reasons",
+        "Mental health"
+      ],
+      "title": null,
+      "scale": {
+        "padding": 0.15
+      },
+      "axis": {
+        "orient": "bottom",
+        "labelAngle": 0,
+        "domain": false,
+        "ticks": false,
+        "labelFontSize": 12,
+        "labelLineHeight": 14,
+        "labelPadding": 24,
+        "labelExpr": "{\"Physical health and fitness\": [\"Physical health\", \"and fitness\"], \"Fun and enjoyment\": [\"Fun and\", \"enjoyment\"], \"Weight control\": [\"Weight\", \"control\"], \"Being outdoors in nature\": [\"Being outdoors\", \"in nature\"], \"Social reasons\": [\"Social\", \"reasons\"], \"Mental health\": [\"Mental\", \"health\"]}[datum.label]",
+        "labelColor": {
+          "condition": {
+            "test": "datum.label == 'Being outdoors in nature'",
+            "value": "#1b9e77"
+          },
+          "value": "#1f2a30"
+        },
+        "labelFontWeight": {
+          "condition": {
+            "test": "datum.label == 'Being outdoors in nature'",
+            "value": 700
+          },
+          "value": 400
+        }
+      }
+    },
+    "y": {
+      "field": "position",
+      "type": "quantitative",
+      "scale": {
+        "domain": [
+          0,
+          1
+        ]
+      },
+      "axis": null
+    }
+  },
+  "layer": [
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "min",
+              "field": "axis_min",
+              "as": "lo"
+            },
+            {
+              "op": "max",
+              "field": "axis_max",
+              "as": "hi"
+            }
+          ],
+          "groupby": [
+            "motivation"
+          ]
+        },
+        {
+          "calculate": "0",
+          "as": "y0"
+        },
+        {
+          "calculate": "1",
+          "as": "y1"
+        }
+      ],
+      "mark": {
+        "type": "rule",
+        "color": "#bdbdbd",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "y": {
+          "field": "y0",
+          "type": "quantitative"
+        },
+        "y2": {
+          "field": "y1"
+        }
+      }
+    },
+    {
+      "params": [
+        {
+          "name": "ageSel",
+          "select": {
+            "type": "point",
+            "fields": [
+              "age"
+            ],
+            "on": "pointerover",
+            "clear": "pointerout"
+          }
+        }
+      ],
+      "mark": {
+        "type": "line",
+        "strokeWidth": 2.5
+      },
+      "encoding": {
+        "detail": {
+          "field": "age"
+        },
+        "color": {
+          "condition": [
+            {
+              "param": "ageSel",
+              "empty": false,
+              "value": "#1f2a30"
+            },
+            {
+              "test": "datum.age == '55–64'",
+              "value": "#1f2a30"
+            }
+          ],
+          "value": "#cfcfcf"
+        },
+        "strokeWidth": {
+          "condition": [
+            {
+              "param": "ageSel",
+              "empty": false,
+              "value": 3.5
+            },
+            {
+              "test": "datum.age == '55–64'",
+              "value": 3.5
+            }
+          ],
+          "value": 1.5
+        },
+        "tooltip": [
+          {
+            "field": "age",
+            "title": "Age group"
+          },
+          {
+            "field": "motivation",
+            "title": "Reason"
+          },
+          {
+            "field": "pct",
+            "title": "Share of active adults (%)"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.pct == datum.axis_max"
+        },
+        {
+          "calculate": "datum.motivation == 'Being outdoors in nature' ? format(datum.pct, '.0f') + '% (age ' + datum.age + ')' : format(datum.pct, '.0f') + '%'",
+          "as": "hi_label"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dy": -10,
+        "fontSize": 11
+      },
+      "encoding": {
+        "y": {
+          "datum": 1,
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "hi_label"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.motivation == 'Being outdoors in nature'",
+            "value": "#1b9e77"
+          },
+          "value": "#5b6770"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.pct == datum.axis_min"
+        },
+        {
+          "calculate": "format(datum.pct, '.0f') + '%'",
+          "as": "lo_label"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dy": 13,
+        "fontSize": 11,
+        "color": "#5b6770"
+      },
+      "encoding": {
+        "y": {
+          "datum": 0,
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "lo_label"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.motivation == 'Mental health' && datum.age == '55–64'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 10,
+        "fontSize": 12,
+        "fontWeight": 700
+      },
+      "encoding": {
+        "text": {
+          "value": "55–64"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "#ffffff",
+    "font": "Source Sans 3, Source Sans Pro, Helvetica, Arial, sans-serif",
+    "padding": {
+      "left": 8,
+      "right": 12,
+      "top": 8,
+      "bottom": 8
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 17,
+      "fontWeight": 700,
+      "color": "#1f2a30",
+      "offset": 16,
+      "subtitleFontSize": 14,
+      "subtitleFontWeight": 400,
+      "subtitleColor": "#5b6770",
+      "subtitlePadding": 8
+    },
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 11,
+      "labelColor": "#5b6770",
+      "titleFontSize": 12,
+      "titleFontWeight": 600,
+      "titleColor": "#5b6770",
+      "domainColor": "#c8c8c8",
+      "tickColor": "#c8c8c8",
+      "grid": false
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "labelColor": "#5b6770",
+      "titleFontSize": 12,
+      "titleFontWeight": 600,
+      "titleColor": "#5b6770"
+    },
+    "text": {
+      "font": "Source Sans 3, Source Sans Pro, Helvetica, Arial, sans-serif",
+      "color": "#1f2a30",
+      "fontSize": 12
+    },
+    "header": {
+      "labelFontSize": 12,
+      "labelColor": "#1f2a30"
+    }
+  },
+  "description": "Being outdoors in nature matters most to 55 to 64 year-olds"
+}

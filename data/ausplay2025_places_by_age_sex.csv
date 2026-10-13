@@ -1,0 +1,217 @@
+group,age,place,pct
+All adults,All ages,"Public spaces (parks, streets, trails, beaches)",62.4
+All adults,All ages,At home,29.8
+All adults,All ages,Gyms and leisure centres,30.5
+All adults,All ages,Free community facilities,21.0
+All adults,All ages,Sports club facilities,18.4
+All adults,All ages,Private or commercial venues,16.2
+All adults,All ages,Recreation club facilities,9.3
+All adults,All ages,School or university facilities,6.4
+All adults,All ages,Workplace,6.5
+All adults,15–17,"Public spaces (parks, streets, trails, beaches)",58.9
+All adults,15–17,At home,43.3
+All adults,15–17,Gyms and leisure centres,35.2
+All adults,15–17,Free community facilities,37.6
+All adults,15–17,Sports club facilities,33.4
+All adults,15–17,Private or commercial venues,17.4
+All adults,15–17,Recreation club facilities,15.5
+All adults,15–17,School or university facilities,36.4
+All adults,15–17,Workplace,6.4
+All adults,18–24,"Public spaces (parks, streets, trails, beaches)",58.7
+All adults,18–24,At home,36.0
+All adults,18–24,Gyms and leisure centres,44.5
+All adults,18–24,Free community facilities,31.5
+All adults,18–24,Sports club facilities,28.5
+All adults,18–24,Private or commercial venues,21.6
+All adults,18–24,Recreation club facilities,15.1
+All adults,18–24,School or university facilities,17.2
+All adults,18–24,Workplace,9.2
+All adults,25–34,"Public spaces (parks, streets, trails, beaches)",61.3
+All adults,25–34,At home,33.8
+All adults,25–34,Gyms and leisure centres,42.7
+All adults,25–34,Free community facilities,29.6
+All adults,25–34,Sports club facilities,23.4
+All adults,25–34,Private or commercial venues,21.6
+All adults,25–34,Recreation club facilities,13.0
+All adults,25–34,School or university facilities,7.7
+All adults,25–34,Workplace,10.3
+All adults,35–44,"Public spaces (parks, streets, trails, beaches)",62.6
+All adults,35–44,At home,31.6
+All adults,35–44,Gyms and leisure centres,34.0
+All adults,35–44,Free community facilities,23.3
+All adults,35–44,Sports club facilities,18.9
+All adults,35–44,Private or commercial venues,18.5
+All adults,35–44,Recreation club facilities,8.3
+All adults,35–44,School or university facilities,4.3
+All adults,35–44,Workplace,7.7
+All adults,45–54,"Public spaces (parks, streets, trails, beaches)",67.6
+All adults,45–54,At home,30.2
+All adults,45–54,Gyms and leisure centres,27.8
+All adults,45–54,Free community facilities,18.3
+All adults,45–54,Sports club facilities,15.3
+All adults,45–54,Private or commercial venues,15.7
+All adults,45–54,Recreation club facilities,7.3
+All adults,45–54,School or university facilities,2.8
+All adults,45–54,Workplace,7.2
+All adults,55–64,"Public spaces (parks, streets, trails, beaches)",71.5
+All adults,55–64,At home,27.9
+All adults,55–64,Gyms and leisure centres,23.0
+All adults,55–64,Free community facilities,14.2
+All adults,55–64,Sports club facilities,13.6
+All adults,55–64,Private or commercial venues,13.5
+All adults,55–64,Recreation club facilities,5.5
+All adults,55–64,School or university facilities,1.3
+All adults,55–64,Workplace,5.1
+All adults,65 and over,"Public spaces (parks, streets, trails, beaches)",56.2
+All adults,65 and over,At home,19.6
+All adults,65 and over,Gyms and leisure centres,15.9
+All adults,65 and over,Free community facilities,8.9
+All adults,65 and over,Sports club facilities,10.8
+All adults,65 and over,Private or commercial venues,8.9
+All adults,65 and over,Recreation club facilities,6.6
+All adults,65 and over,School or university facilities,0.7
+All adults,65 and over,Workplace,1.3
+Men,All ages,"Public spaces (parks, streets, trails, beaches)",61.0
+Men,All ages,At home,27.7
+Men,All ages,Gyms and leisure centres,29.9
+Men,All ages,Free community facilities,21.6
+Men,All ages,Sports club facilities,24.3
+Men,All ages,Private or commercial venues,13.6
+Men,All ages,Recreation club facilities,11.0
+Men,All ages,School or university facilities,7.5
+Men,All ages,Workplace,7.4
+Men,15–17,"Public spaces (parks, streets, trails, beaches)",52.6
+Men,15–17,At home,43.5
+Men,15–17,Gyms and leisure centres,34.7
+Men,15–17,Free community facilities,36.4
+Men,15–17,Sports club facilities,36.3
+Men,15–17,Private or commercial venues,16.4
+Men,15–17,Recreation club facilities,18.0
+Men,15–17,School or university facilities,37.9
+Men,15–17,Workplace,6.3
+Men,18–24,"Public spaces (parks, streets, trails, beaches)",55.6
+Men,18–24,At home,34.5
+Men,18–24,Gyms and leisure centres,42.3
+Men,18–24,Free community facilities,32.4
+Men,18–24,Sports club facilities,34.1
+Men,18–24,Private or commercial venues,18.8
+Men,18–24,Recreation club facilities,18.8
+Men,18–24,School or university facilities,20.2
+Men,18–24,Workplace,9.7
+Men,25–34,"Public spaces (parks, streets, trails, beaches)",57.4
+Men,25–34,At home,30.0
+Men,25–34,Gyms and leisure centres,41.7
+Men,25–34,Free community facilities,30.5
+Men,25–34,Sports club facilities,29.9
+Men,25–34,Private or commercial venues,17.6
+Men,25–34,Recreation club facilities,16.4
+Men,25–34,School or university facilities,9.3
+Men,25–34,Workplace,11.7
+Men,35–44,"Public spaces (parks, streets, trails, beaches)",59.8
+Men,35–44,At home,28.6
+Men,35–44,Gyms and leisure centres,33.9
+Men,35–44,Free community facilities,24.1
+Men,35–44,Sports club facilities,25.0
+Men,35–44,Private or commercial venues,15.1
+Men,35–44,Recreation club facilities,10.3
+Men,35–44,School or university facilities,5.1
+Men,35–44,Workplace,9.5
+Men,45–54,"Public spaces (parks, streets, trails, beaches)",66.6
+Men,45–54,At home,27.2
+Men,45–54,Gyms and leisure centres,27.8
+Men,45–54,Free community facilities,18.4
+Men,45–54,Sports club facilities,21.1
+Men,45–54,Private or commercial venues,13.4
+Men,45–54,Recreation club facilities,9.2
+Men,45–54,School or university facilities,3.3
+Men,45–54,Workplace,7.9
+Men,55–64,"Public spaces (parks, streets, trails, beaches)",72.2
+Men,55–64,At home,25.8
+Men,55–64,Gyms and leisure centres,21.4
+Men,55–64,Free community facilities,14.1
+Men,55–64,Sports club facilities,18.7
+Men,55–64,Private or commercial venues,9.9
+Men,55–64,Recreation club facilities,5.6
+Men,55–64,School or university facilities,1.5
+Men,55–64,Workplace,5.7
+Men,65 and over,"Public spaces (parks, streets, trails, beaches)",58.7
+Men,65 and over,At home,19.1
+Men,65 and over,Gyms and leisure centres,14.4
+Men,65 and over,Free community facilities,9.3
+Men,65 and over,Sports club facilities,16.5
+Men,65 and over,Private or commercial venues,7.8
+Men,65 and over,Recreation club facilities,5.5
+Men,65 and over,School or university facilities,0.8
+Men,65 and over,Workplace,1.3
+Women,All ages,"Public spaces (parks, streets, trails, beaches)",63.8
+Women,All ages,At home,31.7
+Women,All ages,Gyms and leisure centres,31.2
+Women,All ages,Free community facilities,20.3
+Women,All ages,Sports club facilities,12.8
+Women,All ages,Private or commercial venues,18.8
+Women,All ages,Recreation club facilities,7.8
+Women,All ages,School or university facilities,5.3
+Women,All ages,Workplace,5.7
+Women,15–17,"Public spaces (parks, streets, trails, beaches)",66.3
+Women,15–17,At home,42.9
+Women,15–17,Gyms and leisure centres,36.4
+Women,15–17,Free community facilities,39.5
+Women,15–17,Sports club facilities,30.7
+Women,15–17,Private or commercial venues,18.9
+Women,15–17,Recreation club facilities,13.3
+Women,15–17,School or university facilities,35.8
+Women,15–17,Workplace,6.4
+Women,18–24,"Public spaces (parks, streets, trails, beaches)",62.0
+Women,18–24,At home,37.5
+Women,18–24,Gyms and leisure centres,47.0
+Women,18–24,Free community facilities,30.7
+Women,18–24,Sports club facilities,22.9
+Women,18–24,Private or commercial venues,24.7
+Women,18–24,Recreation club facilities,11.4
+Women,18–24,School or university facilities,14.1
+Women,18–24,Workplace,8.8
+Women,25–34,"Public spaces (parks, streets, trails, beaches)",65.3
+Women,25–34,At home,37.7
+Women,25–34,Gyms and leisure centres,43.7
+Women,25–34,Free community facilities,28.8
+Women,25–34,Sports club facilities,17.0
+Women,25–34,Private or commercial venues,25.7
+Women,25–34,Recreation club facilities,9.8
+Women,25–34,School or university facilities,6.1
+Women,25–34,Workplace,8.9
+Women,35–44,"Public spaces (parks, streets, trails, beaches)",65.4
+Women,35–44,At home,34.6
+Women,35–44,Gyms and leisure centres,34.1
+Women,35–44,Free community facilities,22.5
+Women,35–44,Sports club facilities,13.0
+Women,35–44,Private or commercial venues,21.7
+Women,35–44,Recreation club facilities,6.5
+Women,35–44,School or university facilities,3.5
+Women,35–44,Workplace,6.1
+Women,45–54,"Public spaces (parks, streets, trails, beaches)",68.5
+Women,45–54,At home,33.1
+Women,45–54,Gyms and leisure centres,27.8
+Women,45–54,Free community facilities,18.3
+Women,45–54,Sports club facilities,9.8
+Women,45–54,Private or commercial venues,18.0
+Women,45–54,Recreation club facilities,5.5
+Women,45–54,School or university facilities,2.4
+Women,45–54,Workplace,6.5
+Women,55–64,"Public spaces (parks, streets, trails, beaches)",70.9
+Women,55–64,At home,29.9
+Women,55–64,Gyms and leisure centres,24.6
+Women,55–64,Free community facilities,14.2
+Women,55–64,Sports club facilities,8.7
+Women,55–64,Private or commercial venues,16.9
+Women,55–64,Recreation club facilities,5.5
+Women,55–64,School or university facilities,1.1
+Women,55–64,Workplace,4.6
+Women,65 and over,"Public spaces (parks, streets, trails, beaches)",54.2
+Women,65 and over,At home,20.2
+Women,65 and over,Gyms and leisure centres,17.3
+Women,65 and over,Free community facilities,8.7
+Women,65 and over,Sports club facilities,5.9
+Women,65 and over,Private or commercial venues,9.9
+Women,65 and over,Recreation club facilities,7.6
+Women,65 and over,School or university facilities,0.6
+Women,65 and over,Workplace,1.2

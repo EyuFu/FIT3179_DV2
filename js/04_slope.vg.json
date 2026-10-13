@@ -1,0 +1,250 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 330,
+  "data": {
+    "url": "data/ausplay_activity_2024_vs_2025.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "pct_2024": "number",
+        "pct_2025": "number",
+        "change_pts": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": {
+        "field": "activity",
+        "oneOf": [
+          "Walking for exercise",
+          "Gym and fitness",
+          "Bushwalking",
+          "Running and jogging",
+          "Swimming",
+          "Cycling",
+          "Pilates",
+          "Yoga"
+        ]
+      }
+    },
+    {
+      "calculate": "indexof([\"Walking for exercise\", \"Gym and fitness\", \"Bushwalking\", \"Pilates\"], datum.activity) >= 0 ? datum.setting : 'Other activities'",
+      "as": "group"
+    },
+    {
+      "fold": [
+        "pct_2024",
+        "pct_2025"
+      ],
+      "as": [
+        "yearKey",
+        "pct"
+      ]
+    },
+    {
+      "calculate": "datum.yearKey == 'pct_2024' ? '2024' : '2025'",
+      "as": "year"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "ordinal",
+      "title": null,
+      "scale": {
+        "padding": 0.15
+      },
+      "axis": {
+        "labelAngle": 0,
+        "labelFontSize": 12,
+        "labelFontWeight": 700,
+        "labelColor": "#1f2a30",
+        "domain": false,
+        "ticks": false,
+        "orient": "top"
+      }
+    },
+    "y": {
+      "field": "pct",
+      "type": "quantitative",
+      "title": null,
+      "scale": {
+        "domain": [
+          0,
+          55
+        ]
+      },
+      "axis": null
+    },
+    "detail": {
+      "field": "activity"
+    },
+    "color": {
+      "field": "group",
+      "type": "nominal",
+      "legend": null,
+      "scale": {
+        "domain": [
+          "Mostly outdoor",
+          "Mostly indoor",
+          "Other activities"
+        ],
+        "range": [
+          "#1b9e77",
+          "#7570b3",
+          "#c8c8c8"
+        ]
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line"
+      },
+      "encoding": {
+        "strokeWidth": {
+          "condition": {
+            "test": "datum.group != 'Other activities'",
+            "value": 3
+          },
+          "value": 1.5
+        },
+        "tooltip": [
+          {
+            "field": "activity",
+            "title": "Activity"
+          },
+          {
+            "field": "pct_2024",
+            "title": "2024 (%)"
+          },
+          {
+            "field": "pct_2025",
+            "title": "2025 (%)"
+          },
+          {
+            "field": "change_pts",
+            "title": "Change (percentage points)"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "opacity": 1
+      },
+      "encoding": {
+        "size": {
+          "condition": {
+            "test": "datum.group != 'Other activities'",
+            "value": 60
+          },
+          "value": 25
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year == '2025' && datum.group != 'Other activities'"
+        },
+        {
+          "calculate": "datum.change_pts >= 1 ? [datum.activity + '  ' + format(datum.pct, '.1f') + '%', '(up ' + format(datum.change_pts, '.1f') + ' points)'] : datum.activity + '  ' + format(datum.pct, '.1f') + '%'",
+          "as": "lab"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 8,
+        "fontSize": 11,
+        "fontWeight": 700,
+        "lineHeight": 13
+      },
+      "encoding": {
+        "text": {
+          "field": "lab"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year == '2024' && datum.group != 'Other activities'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -8,
+        "fontSize": 11
+      },
+      "encoding": {
+        "text": {
+          "field": "pct",
+          "type": "quantitative",
+          "format": ".1f"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "#ffffff",
+    "font": "Source Sans 3, Source Sans Pro, Helvetica, Arial, sans-serif",
+    "padding": {
+      "left": 40,
+      "right": 190,
+      "top": 8,
+      "bottom": 8
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 17,
+      "fontWeight": 700,
+      "color": "#1f2a30",
+      "offset": 16,
+      "subtitleFontSize": 14,
+      "subtitleFontWeight": 400,
+      "subtitleColor": "#5b6770",
+      "subtitlePadding": 8
+    },
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 11,
+      "labelColor": "#5b6770",
+      "titleFontSize": 12,
+      "titleFontWeight": 600,
+      "titleColor": "#5b6770",
+      "domainColor": "#c8c8c8",
+      "tickColor": "#c8c8c8",
+      "grid": false
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "labelColor": "#5b6770",
+      "titleFontSize": 12,
+      "titleFontWeight": 600,
+      "titleColor": "#5b6770"
+    },
+    "text": {
+      "font": "Source Sans 3, Source Sans Pro, Helvetica, Arial, sans-serif",
+      "color": "#1f2a30",
+      "fontSize": 12
+    },
+    "header": {
+      "labelFontSize": 12,
+      "labelColor": "#1f2a30"
+    }
+  },
+  "description": "2025: gyms bounced back; the outdoors held steady",
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding"
+  }
+}

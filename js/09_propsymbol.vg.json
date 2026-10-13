@@ -1,0 +1,267 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 460,
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [
+      -18,
+      -36
+    ],
+    "rotate": [
+      -132,
+      0
+    ]
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/aus_states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "states"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#f7f6f2",
+        "stroke": "#b9b9b9",
+        "strokeWidth": 0.8
+      }
+    },
+    {
+      "data": {
+        "url": "data/state_summary_2025.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "centroid_lon": "number",
+            "centroid_lat": "number",
+            "outdoor_stations_per_100k": "number",
+            "osm_outdoor_stations": "number",
+            "population_2026q1": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "calculate": "datum.state == 'ACT' ? datum.centroid_lon + 1.6 : datum.centroid_lon",
+          "as": "plon"
+        },
+        {
+          "calculate": "datum.outdoor_stations_per_100k < 6 ? 'below 6' : datum.outdoor_stations_per_100k < 9 ? '6 to 9' : datum.outdoor_stations_per_100k < 12 ? '9 to 12' : '12 or more'",
+          "as": "rate_class"
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "opacity": 0.9,
+        "stroke": "#0f4f3c",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "longitude": {
+          "field": "plon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "centroid_lat",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "osm_outdoor_stations",
+          "type": "quantitative",
+          "title": "Mapped outdoor stations",
+          "scale": {
+            "range": [
+              0,
+              2400
+            ],
+            "domain": [
+              0,
+              800
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "values": [
+              100,
+              400,
+              800
+            ],
+            "symbolFillColor": "#ffffff",
+            "symbolStrokeColor": "#0f4f3c",
+            "symbolStrokeWidth": 1
+          }
+        },
+        "color": {
+          "field": "rate_class",
+          "type": "ordinal",
+          "title": "Stations per 100,000 people",
+          "scale": {
+            "domain": [
+              "below 6",
+              "6 to 9",
+              "9 to 12",
+              "12 or more"
+            ],
+            "range": [
+              "#ccece6",
+              "#66c2a4",
+              "#238b45",
+              "#00441b"
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "symbolType": "circle",
+            "symbolSize": 160,
+            "symbolStrokeColor": "#0f4f3c",
+            "symbolStrokeWidth": 1
+          }
+        },
+        "order": {
+          "field": "osm_outdoor_stations",
+          "sort": "descending"
+        },
+        "tooltip": [
+          {
+            "field": "state_name",
+            "title": "State or territory"
+          },
+          {
+            "field": "osm_outdoor_stations",
+            "title": "Mapped outdoor stations"
+          },
+          {
+            "field": "population_2026q1",
+            "title": "Population",
+            "format": ","
+          },
+          {
+            "field": "outdoor_stations_per_100k",
+            "title": "Stations per 100,000 people"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "data/state_summary_2025.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "centroid_lon": "number",
+            "centroid_lat": "number",
+            "outdoor_stations_per_100k": "number",
+            "osm_outdoor_stations": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.state == 'ACT' || datum.state == 'NSW'"
+        },
+        {
+          "calculate": "datum.state == 'ACT' ? datum.centroid_lon + 1.6 : datum.centroid_lon",
+          "as": "plon"
+        },
+        {
+          "calculate": "datum.state == 'ACT' ? 151.9 : 153.6",
+          "as": "lab_lon"
+        },
+        {
+          "calculate": "datum.state == 'ACT' ? -35.5 : -31.3",
+          "as": "lab_lat"
+        },
+        {
+          "calculate": "datum.state == 'ACT' ? ['◀ Australian Capital Territory:', '    most per person,', '    ' + format(datum.outdoor_stations_per_100k, '.1f') + ' per 100,000'] : ['◀ New South Wales:', '    most stations,', '    ' + format(datum.osm_outdoor_stations, ',') + ' in total']",
+          "as": "lab"
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "baseline": "top",
+            "dy": -7,
+            "fontSize": 12,
+            "lineHeight": 15,
+            "fontWeight": 600
+          },
+          "encoding": {
+            "longitude": {
+              "field": "lab_lon",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "lab_lat",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "lab"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "background": "#ffffff",
+    "font": "Source Sans 3, Source Sans Pro, Helvetica, Arial, sans-serif",
+    "padding": {
+      "left": 8,
+      "right": 110,
+      "top": 8,
+      "bottom": 8
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 17,
+      "fontWeight": 700,
+      "color": "#1f2a30",
+      "offset": 16,
+      "subtitleFontSize": 14,
+      "subtitleFontWeight": 400,
+      "subtitleColor": "#5b6770",
+      "subtitlePadding": 8
+    },
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 11,
+      "labelColor": "#5b6770",
+      "titleFontSize": 12,
+      "titleFontWeight": 600,
+      "titleColor": "#5b6770",
+      "domainColor": "#c8c8c8",
+      "tickColor": "#c8c8c8",
+      "grid": false
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "labelColor": "#5b6770",
+      "titleFontSize": 12,
+      "titleFontWeight": 600,
+      "titleColor": "#5b6770"
+    },
+    "text": {
+      "font": "Source Sans 3, Source Sans Pro, Helvetica, Arial, sans-serif",
+      "color": "#1f2a30",
+      "fontSize": 12
+    },
+    "header": {
+      "labelFontSize": 12,
+      "labelColor": "#1f2a30"
+    }
+  },
+  "description": "New South Wales has the most stations; per person, the Australian Capital Territory leads",
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding"
+  }
+}

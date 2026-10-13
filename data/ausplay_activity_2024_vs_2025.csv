@@ -1,0 +1,143 @@
+activity,pct_2024,pct_2025,change_pts,setting
+Walking for exercise,49.9,50.2,0.3,Mostly outdoor
+Gym and fitness,30.3,34.1,3.8,Mostly indoor
+Bushwalking,16.9,17.5,0.6,Mostly outdoor
+Running and jogging,16.0,16.5,0.5,Mostly outdoor
+Swimming,15.2,15.4,0.2,Mostly outdoor
+Cycling,8.6,8.3,-0.3,Mostly outdoor
+Pilates,5.8,7.2,1.4,Mostly indoor
+Football (soccer),5.4,5.6,0.2,Mostly outdoor
+Yoga,5.0,5.1,0.1,Mostly indoor
+Tennis,5.1,4.9,-0.2,Mostly outdoor
+Golf,4.7,4.6,-0.1,Mostly outdoor
+Basketball,4.7,4.5,-0.2,Mostly indoor
+Cricket,2.4,2.5,0.1,Mostly outdoor
+Australian rules football,2.6,2.4,-0.2,Mostly outdoor
+Netball,2.1,2.1,0.0,Mostly indoor
+Badminton,1.8,1.9,0.1,Mostly indoor
+Table tennis,1.6,1.8,0.2,Mostly indoor
+Dancing,1.8,1.6,-0.2,Mostly indoor
+Surfing,1.4,1.4,0.0,Mostly outdoor
+Volleyball (indoor and outdoor),1.4,1.3,-0.1,Mixed/other
+"Athletics, track and field",1.5,1.3,-0.2,Mixed/other
+Pickleball/padel,0.7,1.3,0.6,Mixed/other
+Fishing,1.2,1.1,-0.1,Mostly outdoor
+DanceSport,1.0,1.1,0.1,Mixed/other
+Weight lifting,1.4,1.0,-0.4,Mixed/other
+Canoeing and kayaking,1.0,1.0,0.0,Mostly outdoor
+Motor cycling,1.1,0.9,-0.2,Mixed/other
+Virtual based physical activity,1.0,0.9,-0.1,Mixed/other
+Ski & snowboard,0.8,0.8,0.0,Mixed/other
+Underwater sports,0.8,0.8,0.0,Mixed/other
+Bowls,0.9,0.8,-0.1,Mixed/other
+Boxing,0.9,0.8,-0.1,Mostly indoor
+Rugby league,0.7,0.8,0.1,Mixed/other
+Mountain biking,0.6,0.7,0.1,Mostly outdoor
+Touch football,0.8,0.7,-0.1,Mixed/other
+Tenpin bowling,0.6,0.6,0.0,Mixed/other
+Rowing,0.6,0.6,0.0,Mixed/other
+Martial arts,0.7,0.6,-0.1,Mostly indoor
+CrossFit and functional fitness,0.6,0.6,0.0,Mostly indoor
+Hockey,0.4,0.5,0.1,Mixed/other
+Sport climbing,0.4,0.5,0.1,Mixed/other
+Gymnastics,0.6,0.5,-0.1,Mixed/other
+Rock climbing/Abseiling/Caving,0.4,0.5,0.1,Mixed/other
+Squash,0.5,0.4,-0.1,Mixed/other
+Rugby union,0.3,0.4,0.1,Mixed/other
+Equestrian,0.4,0.4,0.0,Mixed/other
+Skate,0.5,0.4,-0.1,Mixed/other
+Calisthenics,0.2,0.4,0.2,Mixed/other
+Billiards/Snooker/Pool,0.3,0.3,0.0,Mixed/other
+Baseball,0.4,0.3,-0.1,Mixed/other
+Motor sport,0.3,0.3,0.0,Mixed/other
+Sailing,0.3,0.3,0.0,Mixed/other
+Archery,0.2,0.2,0.0,Mixed/other
+Air sports,0.4,0.2,-0.2,Mixed/other
+Ice skating,0.2,0.2,0.0,Mixed/other
+Waterskiing/Wakeboarding,0.2,0.2,0.0,Mixed/other
+Shooting/field,0.2,0.2,0.0,Mixed/other
+Paddle sports,0.2,0.2,0.0,Mixed/other
+Muay Thai,0.1,0.2,0.1,Mixed/other
+Flying disc,0.2,0.2,0.0,Mixed/other
+Rope skipping,0.3,0.2,-0.1,Mixed/other
+Oztag,0.3,0.2,-0.1,Mixed/other
+Darts,0.2,0.2,0.0,Mixed/other
+eSports,0.3,0.2,-0.1,Mixed/other
+Karate,0.2,0.2,0.0,Mixed/other
+Jujitsu,0.2,0.2,0.0,Mixed/other
+Softball,0.1,0.1,0.0,Mixed/other
+Adventure racing,0.2,0.1,-0.1,Mixed/other
+Water polo,0.1,0.1,0.0,Mixed/other
+Triathlon,0.1,0.1,0.0,Mostly outdoor
+Mountain climbing,0.1,0.1,0.0,Mixed/other
+Obstacle,0.0,0.1,0.1,Mixed/other
+Judo,0.0,0.1,0.1,Mixed/other
+Gaelic football,0.0,0.1,0.1,Mixed/other
+Croquet,0.1,0.1,0.0,Mixed/other
+Lifesaving surf,0.1,0.1,0.0,Mixed/other
+Dodgeball,0.1,0.1,0.0,Mixed/other
+Dragon boat racing,0.0,0.1,0.1,Mixed/other
+Scootering,0.2,0.1,-0.1,Mixed/other
+Orienteering,0.0,0.1,0.1,Mixed/other
+Ice hockey,0.1,0.1,0.0,Mixed/other
+Jet skiing,0.1,0.1,0.0,Mixed/other
+Mixed martial arts,0.1,0.1,0.0,Mixed/other
+Shooting/range,0.1,0.1,0.0,Mixed/other
+Synchronised swimming,0.1,0.1,0.0,Mixed/other
+Taekwondo/Taekwon-do,0.1,0.1,0.0,Mixed/other
+Physical Culture,0.0,0.1,0.1,Mixed/other
+Handball,0.1,0.1,0.0,Mixed/other
+Bocce/Boules,0.0,0.0,0.0,Mixed/other
+Biathlon,0.0,0.0,0.0,Mixed/other
+Baton twirling,0.0,0.0,0.0,Mixed/other
+Bobsledding,0.0,0.0,0.0,Mixed/other
+BMX,0.0,0.0,0.0,Mixed/other
+Goalball,0.0,0.0,0.0,Mixed/other
+Curling,0.0,0.0,0.0,Mixed/other
+Circus,0.0,0.0,0.0,Mixed/other
+Campdrafting,0.0,0.0,0.0,Mixed/other
+Broomball,0.0,0.0,0.0,Mixed/other
+Eight ball,0.0,0.0,0.0,Mixed/other
+Boomerang throwing,0.0,0.0,0.0,Mixed/other
+Boccia,0.0,0.0,0.0,Mixed/other
+Body building,0.0,0.0,0.0,Mixed/other
+Fencing,0.1,0.0,-0.1,Mixed/other
+Diving,0.0,0.0,0.0,Mixed/other
+Floorball,0.0,0.0,0.0,Mixed/other
+Gridiron,0.1,0.0,-0.1,Mixed/other
+Geocaching,0.0,0.0,0.0,Mixed/other
+Guides,0.0,0.0,0.0,Mixed/other
+Ice racing/speed skating,0.0,0.0,0.0,Mixed/other
+Horse racing,0.0,0.0,0.0,Mixed/other
+Modern pentathlon,0.0,0.0,0.0,Mixed/other
+Luging,0.0,0.0,0.0,Mixed/other
+Marching,0.0,0.0,0.0,Mixed/other
+Kendo,0.0,0.0,0.0,Mixed/other
+Korfball,0.0,0.0,0.0,Mixed/other
+Kung fu wushu,0.0,0.0,0.0,Mixed/other
+Lacrosse,0.0,0.0,0.0,Mixed/other
+Lifesaving royal,0.0,0.0,0.0,Mixed/other
+Kitesurfing/kiteboarding,0.0,0.0,0.0,Mixed/other
+Harness racing,0.0,0.0,0.0,Mixed/other
+Petanque,0.0,0.0,0.0,Mixed/other
+Parkour,0.0,0.0,0.0,Mixed/other
+Polo,0.0,0.0,0.0,Mixed/other
+Polocrosse,0.0,0.0,0.0,Mixed/other
+Outrigger canoe,0.0,0.0,0.0,Mixed/other
+Paintball,0.1,0.0,-0.1,Mixed/other
+Sepak takraw,0.0,0.0,0.0,Mixed/other
+Scouts,0.0,0.0,0.0,Mixed/other
+Powerlifting,0.1,0.0,-0.1,Mixed/other
+Pony Club,0.0,0.0,0.0,Mixed/other
+Ready Steady Go Kids,0.0,0.0,0.0,Mixed/other
+Rodeo,0.0,0.0,0.0,Mixed/other
+Rogaining,0.0,0.0,0.0,Mixed/other
+Roller Derby,0.0,0.0,0.0,Mixed/other
+Tee ball,0.0,0.0,0.0,Mixed/other
+Sword fighting,0.0,0.0,0.0,Mixed/other
+Skeleton,0.0,0.0,0.0,Mixed/other
+Skirmish,0.0,0.0,0.0,Mixed/other
+Tobogganing,0.0,0.0,0.0,Mixed/other
+Wheelchair rugby,0.0,0.0,0.0,Mixed/other
+Wood chopping,0.0,0.0,0.0,Mixed/other
+Wrestling,0.0,0.0,0.0,Mixed/other

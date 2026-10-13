@@ -1,0 +1,55 @@
+area,activity,pct,axis
+New South Wales,Walking for exercise,48.2,0
+New South Wales,Bushwalking,17.4,1
+New South Wales,Running and jogging,15.6,2
+New South Wales,Swimming,16.5,3
+New South Wales,Cycling,7.0,4
+New South Wales,Gym and fitness,32.5,5
+Victoria,Walking for exercise,51.6,0
+Victoria,Bushwalking,16.1,1
+Victoria,Running and jogging,17.3,2
+Victoria,Swimming,13.4,3
+Victoria,Cycling,9.0,4
+Victoria,Gym and fitness,35.0,5
+Queensland,Walking for exercise,49.8,0
+Queensland,Bushwalking,17.7,1
+Queensland,Running and jogging,16.0,2
+Queensland,Swimming,16.7,3
+Queensland,Cycling,7.6,4
+Queensland,Gym and fitness,34.8,5
+South Australia,Walking for exercise,51.6,0
+South Australia,Bushwalking,15.4,1
+South Australia,Running and jogging,15.5,2
+South Australia,Swimming,11.8,3
+South Australia,Cycling,8.4,4
+South Australia,Gym and fitness,31.0,5
+Western Australia,Walking for exercise,51.0,0
+Western Australia,Bushwalking,18.3,1
+Western Australia,Running and jogging,17.3,2
+Western Australia,Swimming,16.3,3
+Western Australia,Cycling,10.3,4
+Western Australia,Gym and fitness,35.8,5
+Tasmania,Walking for exercise,55.9,0
+Tasmania,Bushwalking,27.5,1
+Tasmania,Running and jogging,16.9,2
+Tasmania,Swimming,13.9,3
+Tasmania,Cycling,9.1,4
+Tasmania,Gym and fitness,29.9,5
+Northern Territory,Walking for exercise,48.1,0
+Northern Territory,Bushwalking,19.0,1
+Northern Territory,Running and jogging,21.0,2
+Northern Territory,Swimming,18.1,3
+Northern Territory,Cycling,9.9,4
+Northern Territory,Gym and fitness,43.1,5
+Australian Capital Territory,Walking for exercise,54.2,0
+Australian Capital Territory,Bushwalking,26.8,1
+Australian Capital Territory,Running and jogging,23.2,2
+Australian Capital Territory,Swimming,17.6,3
+Australian Capital Territory,Cycling,14.0,4
+Australian Capital Territory,Gym and fitness,44.2,5
+Australia,Walking for exercise,50.2,0
+Australia,Bushwalking,17.5,1
+Australia,Running and jogging,16.5,2
+Australia,Swimming,15.4,3
+Australia,Cycling,8.3,4
+Australia,Gym and fitness,34.1,5

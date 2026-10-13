@@ -1,0 +1,315 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "data/ausplay2025_activity_by_age.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "pct": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "calculate": "[\"Walking for exercise\", \"Cycling\", \"Golf\", \"Bushwalking\", \"Swimming\", \"Gym and fitness\", \"Running and jogging\", \"Football (soccer)\", \"Pilates\", \"Yoga\"]",
+      "as": "panel"
+    },
+    {
+      "flatten": [
+        "panel"
+      ]
+    },
+    {
+      "calculate": "datum.panel == datum.activity",
+      "as": "is_self"
+    },
+    {
+      "calculate": "datum.activity == 'Walking for exercise' ? 'Mostly outdoor' : datum.activity == 'Gym and fitness' ? 'Mostly indoor' : 'Other activities'",
+      "as": "group"
+    }
+  ],
+  "facet": {
+    "field": "panel",
+    "type": "nominal",
+    "sort": [
+      "Walking for exercise",
+      "Cycling",
+      "Golf",
+      "Bushwalking",
+      "Swimming",
+      "Gym and fitness",
+      "Running and jogging",
+      "Football (soccer)",
+      "Pilates",
+      "Yoga"
+    ],
+    "title": null,
+    "header": {
+      "labelFontSize": 12,
+      "labelFontWeight": 600,
+      "labelColor": "#1f2a30",
+      "labelAnchor": "start",
+      "labelPadding": 4,
+      "labelBaseline": "bottom",
+      "labelLineHeight": 14,
+      "labelExpr": "length(datum.value) > 12 ? [substring(datum.value, 0, lastindexof(datum.value, ' ')), substring(datum.value, lastindexof(datum.value, ' ') + 1)] : ['', datum.value]"
+    }
+  },
+  "columns": 5,
+  "spec": {
+    "width": 136,
+    "height": 110,
+    "encoding": {
+      "x": {
+        "field": "age",
+        "type": "ordinal",
+        "sort": [
+          "15–17",
+          "18–24",
+          "25–34",
+          "35–44",
+          "45–54",
+          "55–64",
+          "65 and over"
+        ],
+        "title": "Age group",
+        "scale": {
+          "padding": 0
+        },
+        "axis": {
+          "labels": false,
+          "ticks": false,
+          "titleFontSize": 11,
+          "titleFontWeight": 400,
+          "titleColor": "#5b6770",
+          "titlePadding": 18
+        }
+      },
+      "y": {
+        "field": "pct",
+        "type": "quantitative",
+        "scale": {
+          "domain": [
+            0,
+            70
+          ]
+        },
+        "title": "Share of adults (%)",
+        "axis": {
+          "values": [
+            0,
+            35,
+            70
+          ],
+          "ticks": false,
+          "domain": false,
+          "grid": true,
+          "gridColor": "#eeeeee"
+        }
+      }
+    },
+    "layer": [
+      {
+        "transform": [
+          {
+            "filter": "!datum.is_self"
+          }
+        ],
+        "mark": {
+          "type": "line",
+          "color": "#e3e1dc",
+          "strokeWidth": 1
+        },
+        "encoding": {
+          "detail": {
+            "field": "activity"
+          }
+        }
+      },
+      {
+        "transform": [
+          {
+            "filter": "datum.is_self && datum.age == '15–17' && indexof([\"Walking for exercise\", \"Cycling\", \"Golf\", \"Bushwalking\", \"Swimming\", \"Gym and fitness\", \"Running and jogging\", \"Football (soccer)\", \"Pilates\", \"Yoga\"], datum.panel) >= 5"
+          }
+        ],
+        "mark": {
+          "type": "text",
+          "align": "left",
+          "baseline": "top",
+          "fontSize": 11,
+          "color": "#5b6770"
+        },
+        "encoding": {
+          "text": {
+            "field": "age"
+          },
+          "y": {
+            "value": 99
+          }
+        }
+      },
+      {
+        "transform": [
+          {
+            "filter": "datum.is_self && datum.age == '65 and over' && indexof([\"Walking for exercise\", \"Cycling\", \"Golf\", \"Bushwalking\", \"Swimming\", \"Gym and fitness\", \"Running and jogging\", \"Football (soccer)\", \"Pilates\", \"Yoga\"], datum.panel) >= 5"
+          }
+        ],
+        "mark": {
+          "type": "text",
+          "align": "right",
+          "baseline": "top",
+          "fontSize": 11,
+          "color": "#5b6770"
+        },
+        "encoding": {
+          "text": {
+            "field": "age"
+          },
+          "y": {
+            "value": 99
+          }
+        }
+      },
+      {
+        "transform": [
+          {
+            "filter": "datum.is_self"
+          }
+        ],
+        "mark": {
+          "type": "line",
+          "strokeWidth": 2.5,
+          "point": {
+            "size": 18,
+            "filled": true
+          }
+        },
+        "encoding": {
+          "color": {
+            "field": "group",
+            "type": "nominal",
+            "legend": null,
+            "scale": {
+              "domain": [
+                "Mostly outdoor",
+                "Mostly indoor",
+                "Other activities"
+              ],
+              "range": [
+                "#1b9e77",
+                "#7570b3",
+                "#5b6770"
+              ]
+            }
+          },
+          "tooltip": [
+            {
+              "field": "activity",
+              "title": "Activity"
+            },
+            {
+              "field": "age",
+              "title": "Age group"
+            },
+            {
+              "field": "pct",
+              "title": "Share of adults (%)"
+            }
+          ]
+        }
+      },
+      {
+        "transform": [
+          {
+            "filter": "datum.is_self && ((datum.activity == 'Walking for exercise' && datum.age == '55–64') || (datum.activity == 'Gym and fitness' && datum.age == '18–24'))"
+          },
+          {
+            "calculate": "format(datum.pct, '.0f') + '%'",
+            "as": "lab"
+          }
+        ],
+        "mark": {
+          "type": "text",
+          "dy": -10,
+          "fontSize": 11,
+          "fontWeight": 700
+        },
+        "encoding": {
+          "text": {
+            "field": "lab"
+          },
+          "color": {
+            "condition": {
+              "test": "datum.activity == 'Walking for exercise'",
+              "value": "#1b9e77"
+            },
+            "value": "#7570b3"
+          }
+        }
+      }
+    ]
+  },
+  "resolve": {
+    "scale": {
+      "y": "shared",
+      "x": "shared"
+    }
+  },
+  "config": {
+    "background": "#ffffff",
+    "font": "Source Sans 3, Source Sans Pro, Helvetica, Arial, sans-serif",
+    "padding": {
+      "left": 8,
+      "right": 12,
+      "top": 8,
+      "bottom": 8
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 17,
+      "fontWeight": 700,
+      "color": "#1f2a30",
+      "offset": 16,
+      "subtitleFontSize": 14,
+      "subtitleFontWeight": 400,
+      "subtitleColor": "#5b6770",
+      "subtitlePadding": 8
+    },
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 11,
+      "labelColor": "#5b6770",
+      "titleFontSize": 12,
+      "titleFontWeight": 600,
+      "titleColor": "#5b6770",
+      "domainColor": "#c8c8c8",
+      "tickColor": "#c8c8c8",
+      "grid": false
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "labelColor": "#5b6770",
+      "titleFontSize": 12,
+      "titleFontWeight": 600,
+      "titleColor": "#5b6770"
+    },
+    "text": {
+      "font": "Source Sans 3, Source Sans Pro, Helvetica, Arial, sans-serif",
+      "color": "#1f2a30",
+      "fontSize": 12
+    },
+    "header": {
+      "labelFontSize": 12,
+      "labelColor": "#1f2a30"
+    },
+    "facet": {
+      "spacing": {
+        "row": 26,
+        "column": 10
+      }
+    }
+  },
+  "description": "Walking grows with age; gym use fades"
+}

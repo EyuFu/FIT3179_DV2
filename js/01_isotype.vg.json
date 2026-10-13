@@ -1,0 +1,248 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 380,
+  "data": {
+    "url": "data/ausplay2025_places_by_age_sex.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "pct": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.group == 'All adults' && datum.age == 'All ages'"
+    },
+    {
+      "filter": {
+        "field": "place",
+        "oneOf": [
+          "Public spaces (parks, streets, trails, beaches)",
+          "Gyms and leisure centres",
+          "At home"
+        ]
+      }
+    },
+    {
+      "calculate": "round(datum.pct / 5)",
+      "as": "figures"
+    },
+    {
+      "calculate": "sequence(1, 21)",
+      "as": "slots"
+    },
+    {
+      "flatten": [
+        "slots"
+      ],
+      "as": [
+        "slot"
+      ]
+    },
+    {
+      "calculate": "datum.slot + floor((datum.slot - 1) / 5) * 0.7",
+      "as": "xpos"
+    },
+    {
+      "calculate": "datum.slot > datum.figures ? 'empty' : (datum.place == 'Public spaces (parks, streets, trails, beaches)' ? 'highlight' : datum.place == 'Gyms and leisure centres' ? 'indoor' : 'other')",
+      "as": "state"
+    }
+  ],
+  "encoding": {
+    "y": {
+      "field": "place",
+      "type": "nominal",
+      "sort": [
+        "Public spaces (parks, streets, trails, beaches)",
+        "Gyms and leisure centres",
+        "At home"
+      ],
+      "title": null,
+      "axis": null,
+      "scale": {
+        "padding": 0.7
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "shape": "M-0.28,-0.78 a0.28,0.28 0 1,0 0.56,0 a0.28,0.28 0 1,0 -0.56,0 M-0.42,1 L-0.42,-0.2 Q0,-0.45 0.42,-0.2 L0.42,1 Z",
+        "size": 230,
+        "opacity": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "xpos",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0.5,
+              26.6
+            ]
+          },
+          "axis": null
+        },
+        "color": {
+          "field": "state",
+          "type": "nominal",
+          "legend": null,
+          "scale": {
+            "domain": [
+              "highlight",
+              "indoor",
+              "other",
+              "empty"
+            ],
+            "range": [
+              "#1b9e77",
+              "#7570b3",
+              "#8a9096",
+              "#ecebe7"
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "place",
+            "title": "Place"
+          },
+          {
+            "field": "pct",
+            "title": "Share of adults (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.slot == 1"
+        },
+        {
+          "calculate": "format(datum.pct, '.0f') + '%'",
+          "as": "pct_label"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "fontSize": 13,
+        "fontWeight": 700,
+        "dx": 0
+      },
+      "encoding": {
+        "x": {
+          "datum": 23.8,
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "pct_label"
+        },
+        "color": {
+          "condition": [
+            {
+              "test": "datum.place == 'Public spaces (parks, streets, trails, beaches)'",
+              "value": "#1b9e77"
+            },
+            {
+              "test": "datum.place == 'Gyms and leisure centres'",
+              "value": "#7570b3"
+            }
+          ],
+          "value": "#5b6770"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.slot == 1"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "bottom",
+        "dy": -13,
+        "fontSize": 12
+      },
+      "encoding": {
+        "x": {
+          "datum": 0.5,
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "place"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.place == 'Public spaces (parks, streets, trails, beaches)'",
+            "value": "#1f2a30"
+          },
+          "value": "#5b6770"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "#ffffff",
+    "font": "Source Sans 3, Source Sans Pro, Helvetica, Arial, sans-serif",
+    "padding": {
+      "left": 8,
+      "right": 12,
+      "top": 8,
+      "bottom": 8
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 17,
+      "fontWeight": 700,
+      "color": "#1f2a30",
+      "offset": 16,
+      "subtitleFontSize": 14,
+      "subtitleFontWeight": 400,
+      "subtitleColor": "#5b6770",
+      "subtitlePadding": 8
+    },
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 11,
+      "labelColor": "#5b6770",
+      "titleFontSize": 12,
+      "titleFontWeight": 600,
+      "titleColor": "#5b6770",
+      "domainColor": "#c8c8c8",
+      "tickColor": "#c8c8c8",
+      "grid": false
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "labelColor": "#5b6770",
+      "titleFontSize": 12,
+      "titleFontWeight": 600,
+      "titleColor": "#5b6770"
+    },
+    "text": {
+      "font": "Source Sans 3, Source Sans Pro, Helvetica, Arial, sans-serif",
+      "color": "#1f2a30",
+      "fontSize": 12
+    },
+    "header": {
+      "labelFontSize": 12,
+      "labelColor": "#1f2a30"
+    }
+  },
+  "description": "Out of every 100 adults, 62 exercise outdoors",
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding"
+  }
+}

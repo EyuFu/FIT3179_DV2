@@ -1,0 +1,362 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 340,
+  "height": 310,
+  "params": [
+    {
+      "name": "city",
+      "value": "Melbourne",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Sydney",
+          "Melbourne",
+          "Brisbane",
+          "Perth",
+          "Adelaide",
+          "Hobart",
+          "Darwin",
+          "Canberra"
+        ],
+        "name": "Capital city: "
+      }
+    }
+  ],
+  "data": {
+    "url": "data/bom_capital_climate_monthly_means.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "month_num": "number",
+        "mean_max_temp_c": "number",
+        "mean_rainfall_mm": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.city == city"
+    },
+    {
+      "calculate": "datum.month_num - 1",
+      "as": "m0"
+    },
+    {
+      "calculate": "datum.month_num",
+      "as": "m1"
+    },
+    {
+      "calculate": "datum.month_num - 0.5",
+      "as": "mid"
+    },
+    {
+      "calculate": "['January','February','March','April','May','June','July','August','September','October','November','December'][datum.month_num - 1]",
+      "as": "month_name"
+    },
+    {
+      "calculate": "datum.mean_max_temp_c < 15 ? 'below 15' : datum.mean_max_temp_c < 20 ? '15 to 20' : datum.mean_max_temp_c < 25 ? '20 to 25' : datum.mean_max_temp_c < 30 ? '25 to 30' : '30 or more'",
+      "as": "temp_class"
+    },
+    {
+      "calculate": "sqrt(16 * 16 + (110 * 110 - 16 * 16) * datum.mean_rainfall_mm / 450)",
+      "as": "r_px"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "min",
+          "field": "mean_rainfall_mm",
+          "as": "min_rain"
+        }
+      ]
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "values": [
+          {
+            "mm": 50
+          },
+          {
+            "mm": 100
+          },
+          {
+            "mm": 200
+          },
+          {
+            "mm": 400
+          }
+        ]
+      },
+      "transform": [
+        {
+          "calculate": "sqrt(16 * 16 + (110 * 110 - 16 * 16) * datum.mm / 450)",
+          "as": "r_px"
+        },
+        {
+          "calculate": "datum.mm == 400 ? '400 millimetres' : '' + datum.mm",
+          "as": "ring_lab"
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "text",
+            "theta": 3.1416,
+            "fontSize": 11,
+            "color": "#5b6770",
+            "baseline": "top",
+            "dy": 2
+          },
+          "encoding": {
+            "radius": {
+              "field": "r_px",
+              "type": "quantitative",
+              "scale": null
+            },
+            "text": {
+              "field": "ring_lab"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "data": {
+        "values": [
+          {}
+        ]
+      },
+      "mark": {
+        "type": "arc",
+        "fill": null,
+        "stroke": "#dcdcdc",
+        "strokeWidth": 1,
+        "theta": 0,
+        "theta2": 6.2832,
+        "radius": 39.6
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {}
+        ]
+      },
+      "mark": {
+        "type": "arc",
+        "fill": null,
+        "stroke": "#dcdcdc",
+        "strokeWidth": 1,
+        "theta": 0,
+        "theta2": 6.2832,
+        "radius": 53.7
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {}
+        ]
+      },
+      "mark": {
+        "type": "arc",
+        "fill": null,
+        "stroke": "#dcdcdc",
+        "strokeWidth": 1,
+        "theta": 0,
+        "theta2": 6.2832,
+        "radius": 74.3
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {}
+        ]
+      },
+      "mark": {
+        "type": "arc",
+        "fill": null,
+        "stroke": "#dcdcdc",
+        "strokeWidth": 1,
+        "theta": 0,
+        "theta2": 6.2832,
+        "radius": 103.8
+      }
+    },
+    {
+      "mark": {
+        "type": "arc",
+        "stroke": "white",
+        "strokeWidth": 1.5,
+        "innerRadius": 16
+      },
+      "encoding": {
+        "theta": {
+          "field": "m0",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              12
+            ]
+          }
+        },
+        "theta2": {
+          "field": "m1"
+        },
+        "radius": {
+          "field": "r_px",
+          "type": "quantitative",
+          "scale": null
+        },
+        "color": {
+          "field": "temp_class",
+          "type": "ordinal",
+          "title": "Average maximum temperature (°C)",
+          "scale": {
+            "domain": [
+              "below 15",
+              "15 to 20",
+              "20 to 25",
+              "25 to 30",
+              "30 or more"
+            ],
+            "range": [
+              "#feedde",
+              "#fdbe85",
+              "#fd8d3c",
+              "#e6550d",
+              "#a63603"
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "columns": 5,
+            "symbolType": "square",
+            "symbolSize": 150,
+            "symbolStrokeWidth": 0
+          }
+        },
+        "tooltip": [
+          {
+            "field": "month_name",
+            "title": "Month"
+          },
+          {
+            "field": "mean_rainfall_mm",
+            "title": "Average rainfall (millimetres)"
+          },
+          {
+            "field": "mean_max_temp_c",
+            "title": "Average maximum temperature (°C)"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "radius": 130,
+        "fontSize": 11,
+        "color": "#5b6770"
+      },
+      "encoding": {
+        "theta": {
+          "field": "mid",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              12
+            ]
+          }
+        },
+        "text": {
+          "field": "month_name"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.mean_rainfall_mm == datum.min_rain"
+        },
+        {
+          "calculate": "['Driest month: ' + datum.month_name, format(datum.mean_rainfall_mm, '.0f') + (format(datum.mean_rainfall_mm, '.0f') == '1' ? ' millimetre' : ' millimetres') + ' of rain,', format(datum.mean_max_temp_c, '.0f') + '°C average maximum']",
+          "as": "lab"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "top",
+        "fontSize": 12,
+        "fontWeight": 600,
+        "lineHeight": 16,
+        "x": 0,
+        "y": 0,
+        "color": "#1f2a30"
+      },
+      "encoding": {
+        "text": {
+          "field": "lab"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "#ffffff",
+    "font": "Source Sans 3, Source Sans Pro, Helvetica, Arial, sans-serif",
+    "padding": {
+      "left": 8,
+      "right": 12,
+      "top": 8,
+      "bottom": 8
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 17,
+      "fontWeight": 700,
+      "color": "#1f2a30",
+      "offset": 16,
+      "subtitleFontSize": 14,
+      "subtitleFontWeight": 400,
+      "subtitleColor": "#5b6770",
+      "subtitlePadding": 8
+    },
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 11,
+      "labelColor": "#5b6770",
+      "titleFontSize": 12,
+      "titleFontWeight": 600,
+      "titleColor": "#5b6770",
+      "domainColor": "#c8c8c8",
+      "tickColor": "#c8c8c8",
+      "grid": false
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "labelColor": "#5b6770",
+      "titleFontSize": 12,
+      "titleFontWeight": 600,
+      "titleColor": "#5b6770"
+    },
+    "text": {
+      "font": "Source Sans 3, Source Sans Pro, Helvetica, Arial, sans-serif",
+      "color": "#1f2a30",
+      "fontSize": 12
+    },
+    "header": {
+      "labelFontSize": 12,
+      "labelColor": "#1f2a30"
+    }
+  },
+  "description": "Pick your best months to exercise outdoors"
+}

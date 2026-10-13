@@ -1,0 +1,200 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 230,
+  "data": {
+    "url": "data/ausplay2025_places_by_age_sex.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "pct": "number"
+      }
+    }
+  },
+  "params": [
+    {
+      "name": "who",
+      "value": "All adults",
+      "bind": {
+        "input": "select",
+        "options": [
+          "All adults",
+          "Men",
+          "Women"
+        ],
+        "name": "Show: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.group == who && datum.age != 'All ages'"
+    },
+    {
+      "filter": {
+        "field": "place",
+        "oneOf": [
+          "Public spaces (parks, streets, trails, beaches)",
+          "Gyms and leisure centres",
+          "At home",
+          "Free community facilities",
+          "Sports club facilities",
+          "Private or commercial venues"
+        ]
+      }
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "age",
+      "type": "ordinal",
+      "title": "Age group (years)",
+      "sort": [
+        "15–17",
+        "18–24",
+        "25–34",
+        "35–44",
+        "45–54",
+        "55–64",
+        "65 and over"
+      ],
+      "axis": {
+        "labelAngle": 0,
+        "orient": "bottom",
+        "domain": false,
+        "ticks": false,
+        "labelFontSize": 11,
+        "labelLineHeight": 12,
+        "labelExpr": "datum.label == '65 and over' ? ['65 and', 'over'] : datum.label"
+      }
+    },
+    "y": {
+      "field": "place",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "Public spaces (parks, streets, trails, beaches)",
+        "Gyms and leisure centres",
+        "At home",
+        "Free community facilities",
+        "Sports club facilities",
+        "Private or commercial venues"
+      ],
+      "axis": {
+        "domain": false,
+        "ticks": false,
+        "labelLimit": 200,
+        "labelFontSize": 11,
+        "labelLineHeight": 13,
+        "labelExpr": "{\"Public spaces (parks, streets, trails, beaches)\": [\"Public spaces (parks,\", \"streets, trails, beaches)\"], \"Gyms and leisure centres\": [\"Gyms and\", \"leisure centres\"], \"At home\": \"At home\", \"Free community facilities\": [\"Free community\", \"facilities\"], \"Sports club facilities\": [\"Sports club\", \"facilities\"], \"Private or commercial venues\": [\"Private or\", \"commercial venues\"]}[datum.label]"
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "white",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "color": {
+          "field": "pct",
+          "type": "quantitative",
+          "title": "Share of adults (%)",
+          "scale": {
+            "type": "threshold",
+            "domain": [
+              15,
+              30,
+              45,
+              60
+            ],
+            "range": [
+              "#eff3ff",
+              "#bdd7e7",
+              "#6baed6",
+              "#3182bd",
+              "#08519c"
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "labelExpr": "datum.label"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "place",
+            "title": "Place"
+          },
+          {
+            "field": "age",
+            "title": "Age group"
+          },
+          {
+            "field": "pct",
+            "title": "Share of adults (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "background": "#ffffff",
+    "font": "Source Sans 3, Source Sans Pro, Helvetica, Arial, sans-serif",
+    "padding": {
+      "left": 8,
+      "right": 12,
+      "top": 8,
+      "bottom": 8
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 17,
+      "fontWeight": 700,
+      "color": "#1f2a30",
+      "offset": 16,
+      "subtitleFontSize": 14,
+      "subtitleFontWeight": 400,
+      "subtitleColor": "#5b6770",
+      "subtitlePadding": 8
+    },
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 11,
+      "labelColor": "#5b6770",
+      "titleFontSize": 12,
+      "titleFontWeight": 600,
+      "titleColor": "#5b6770",
+      "domainColor": "#c8c8c8",
+      "tickColor": "#c8c8c8",
+      "grid": false
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "labelColor": "#5b6770",
+      "titleFontSize": 12,
+      "titleFontWeight": 600,
+      "titleColor": "#5b6770"
+    },
+    "text": {
+      "font": "Source Sans 3, Source Sans Pro, Helvetica, Arial, sans-serif",
+      "color": "#1f2a30",
+      "fontSize": 12
+    },
+    "header": {
+      "labelFontSize": 12,
+      "labelColor": "#1f2a30"
+    }
+  },
+  "description": "Outdoor exercise grows with age; gym use shrinks",
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding"
+  }
+}
