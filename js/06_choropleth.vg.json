@@ -98,32 +98,35 @@
       },
       "encoding": {
         "color": {
-          "field": "class",
-          "type": "ordinal",
+          "field": "value",
+          "type": "quantitative",
           "title": "Share of adults (%)",
           "scale": {
+            "type": "linear",
             "domain": [
-              "below 62",
-              "62 to 64",
-              "64 to 66",
-              "66 to 68",
-              "68 or more"
+              61.0,
+              72.8
             ],
-            "range": [
-              "#eff3ff",
-              "#bdd7e7",
-              "#6baed6",
-              "#3182bd",
-              "#08519c"
-            ]
+            "scheme": {
+              "name": "blues",
+              "extent": [
+                0.15,
+                1
+              ]
+            }
           },
           "legend": {
             "orient": "bottom",
             "direction": "horizontal",
-            "symbolType": "square",
-            "symbolSize": 200,
-            "symbolStrokeWidth": 0,
-            "columnPadding": 14
+            "gradientLength": 640,
+            "gradientThickness": 14,
+            "values": [
+              61.0,
+              72.8
+            ],
+            "labelExpr": "format(datum.value, '.1f')",
+            "titleOrient": "top",
+            "titleAnchor": "start"
           }
         },
         "tooltip": [
