@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 780,
+  "width": 740,
   "height": 300,
   "data": {
     "url": "data/ausplay2025_motivations.csv",
@@ -27,27 +27,6 @@
           "Mental health"
         ]
       }
-    },
-    {
-      "joinaggregate": [
-        {
-          "op": "min",
-          "field": "pct",
-          "as": "axis_min"
-        },
-        {
-          "op": "max",
-          "field": "pct",
-          "as": "axis_max"
-        }
-      ],
-      "groupby": [
-        "motivation"
-      ]
-    },
-    {
-      "calculate": "(datum.pct - datum.axis_min) / (datum.axis_max - datum.axis_min)",
-      "as": "position"
     }
   ],
   "encoding": {
@@ -73,7 +52,7 @@
         "ticks": false,
         "labelFontSize": 12,
         "labelLineHeight": 14,
-        "labelPadding": 24,
+        "labelPadding": 10,
         "labelExpr": "{\"Physical health and fitness\": [\"Physical health\", \"and fitness\"], \"Fun and enjoyment\": [\"Fun and\", \"enjoyment\"], \"Weight control\": [\"Weight\", \"control\"], \"Being outdoors in nature\": [\"Being outdoors\", \"in nature\"], \"Social reasons\": [\"Social\", \"reasons\"], \"Mental health\": [\"Mental\", \"health\"]}[datum.label]",
         "labelColor": {
           "condition": {
@@ -92,15 +71,30 @@
       }
     },
     "y": {
-      "field": "position",
+      "field": "pct",
       "type": "quantitative",
       "scale": {
         "domain": [
           0,
-          1
+          80
         ]
       },
-      "axis": null
+      "axis": {
+        "values": [
+          0,
+          20,
+          40,
+          60,
+          80
+        ],
+        "labelExpr": "datum.value + '%'",
+        "grid": false,
+        "domain": false,
+        "ticks": false,
+        "title": null,
+        "labelColor": "#5b6770",
+        "labelFontSize": 11
+      }
     }
   },
   "layer": [
@@ -109,14 +103,8 @@
         {
           "aggregate": [
             {
-              "op": "min",
-              "field": "axis_min",
-              "as": "lo"
-            },
-            {
-              "op": "max",
-              "field": "axis_max",
-              "as": "hi"
+              "op": "count",
+              "as": "n"
             }
           ],
           "groupby": [
@@ -128,7 +116,7 @@
           "as": "y0"
         },
         {
-          "calculate": "1",
+          "calculate": "80",
           "as": "y1"
         }
       ],
@@ -189,58 +177,37 @@
     {
       "transform": [
         {
-          "filter": "datum.pct == datum.axis_max"
+          "filter": "datum.age == '55–64'"
         },
         {
-          "calculate": "datum.motivation == 'Being outdoors in nature' ? format(datum.pct, '.0f') + '% (age ' + datum.age + ')' : format(datum.pct, '.0f') + '%'",
-          "as": "hi_label"
+          "calculate": "format(datum.pct, '.0f') + '%'",
+          "as": "lab"
         }
       ],
       "mark": {
         "type": "text",
-        "dy": -10,
+        "align": "left",
+        "dx": 7,
+        "dy": -9,
         "fontSize": 11
       },
       "encoding": {
-        "y": {
-          "datum": 1,
-          "type": "quantitative"
-        },
         "text": {
-          "field": "hi_label"
+          "field": "lab"
         },
         "color": {
           "condition": {
             "test": "datum.motivation == 'Being outdoors in nature'",
             "value": "#1b9e77"
           },
-          "value": "#5b6770"
-        }
-      }
-    },
-    {
-      "transform": [
-        {
-          "filter": "datum.pct == datum.axis_min"
+          "value": "#1f2a30"
         },
-        {
-          "calculate": "format(datum.pct, '.0f') + '%'",
-          "as": "lo_label"
-        }
-      ],
-      "mark": {
-        "type": "text",
-        "dy": 13,
-        "fontSize": 11,
-        "color": "#5b6770"
-      },
-      "encoding": {
-        "y": {
-          "datum": 0,
-          "type": "quantitative"
-        },
-        "text": {
-          "field": "lo_label"
+        "fontWeight": {
+          "condition": {
+            "test": "datum.motivation == 'Being outdoors in nature'",
+            "value": 700
+          },
+          "value": 400
         }
       }
     },
@@ -254,6 +221,7 @@
         "type": "text",
         "align": "left",
         "dx": 10,
+        "dy": 10,
         "fontSize": 12,
         "fontWeight": 700
       },
