@@ -168,19 +168,6 @@
       }
     },
     {
-      "params": [
-        {
-          "name": "pick",
-          "select": {
-            "type": "point",
-            "fields": [
-              "activity"
-            ],
-            "on": "pointerover",
-            "clear": "pointerout"
-          }
-        }
-      ],
       "mark": {
         "type": "line",
         "interpolate": "linear"
@@ -217,14 +204,6 @@
             "value": 3.5
           },
           "value": 1.5
-        },
-        "opacity": {
-          "condition": {
-            "param": "pick",
-            "value": 1,
-            "empty": true
-          },
-          "value": 0.25
         },
         "tooltip": [
           {

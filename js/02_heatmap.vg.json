@@ -11,24 +11,9 @@
       }
     }
   },
-  "params": [
-    {
-      "name": "who",
-      "value": "All adults",
-      "bind": {
-        "input": "select",
-        "options": [
-          "All adults",
-          "Men",
-          "Women"
-        ],
-        "name": "Show: "
-      }
-    }
-  ],
   "transform": [
     {
-      "filter": "datum.group == who && datum.age != 'All ages'"
+      "filter": "datum.group == 'All adults' && datum.age != 'All ages'"
     },
     {
       "filter": {

@@ -2,20 +2,6 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
   "height": 460,
-  "params": [
-    {
-      "name": "yr",
-      "value": "2025",
-      "bind": {
-        "input": "select",
-        "options": [
-          "2024",
-          "2025"
-        ],
-        "name": "Year: "
-      }
-    }
-  ],
   "projection": {
     "type": "conicEqualArea",
     "parallels": [
@@ -97,7 +83,7 @@
           }
         },
         {
-          "calculate": "yr == '2025' ? datum.public_space_pct : datum.public_space_pct_2024",
+          "calculate": "datum.public_space_pct",
           "as": "value"
         },
         {
@@ -173,7 +159,7 @@
           "filter": "datum.state == 'TAS' || datum.state == 'ACT'"
         },
         {
-          "calculate": "yr == '2025' ? datum.public_space_pct : datum.public_space_pct_2024",
+          "calculate": "datum.public_space_pct",
           "as": "value"
         },
         {

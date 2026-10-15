@@ -148,19 +148,6 @@
       }
     },
     {
-      "params": [
-        {
-          "name": "ageSel",
-          "select": {
-            "type": "point",
-            "fields": [
-              "age"
-            ],
-            "on": "pointerover",
-            "clear": "pointerout"
-          }
-        }
-      ],
       "mark": {
         "type": "line",
         "strokeWidth": 2.5
@@ -170,31 +157,17 @@
           "field": "age"
         },
         "color": {
-          "condition": [
-            {
-              "param": "ageSel",
-              "empty": false,
-              "value": "#1f2a30"
-            },
-            {
-              "test": "datum.age == '55–64'",
-              "value": "#1f2a30"
-            }
-          ],
+          "condition": {
+            "test": "datum.age == '55–64'",
+            "value": "#1f2a30"
+          },
           "value": "#cfcfcf"
         },
         "strokeWidth": {
-          "condition": [
-            {
-              "param": "ageSel",
-              "empty": false,
-              "value": 3.5
-            },
-            {
-              "test": "datum.age == '55–64'",
-              "value": 3.5
-            }
-          ],
+          "condition": {
+            "test": "datum.age == '55–64'",
+            "value": 3.5
+          },
           "value": 1.5
         },
         "tooltip": [

@@ -21,18 +21,6 @@
         ],
         "name": "Zoom to: "
       }
-    },
-    {
-      "name": "show",
-      "value": "Outdoor stations and gyms",
-      "bind": {
-        "input": "select",
-        "options": [
-          "Outdoor stations and gyms",
-          "Outdoor stations only"
-        ],
-        "name": "Show: "
-      }
     }
   ],
   "projection": {
@@ -82,9 +70,6 @@
       "transform": [
         {
           "filter": "datum.lon >= 112 && datum.lon <= 154.5 && datum.lat >= -44 && datum.lat <= -10"
-        },
-        {
-          "filter": "show == 'Outdoor stations and gyms' || datum.type == 'Outdoor fitness station'"
         }
       ],
       "mark": {
