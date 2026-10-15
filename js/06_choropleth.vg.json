@@ -2,6 +2,12 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
   "height": 460,
+  "params": [
+    {
+      "name": "chosen",
+      "value": "Tasmania"
+    }
+  ],
   "projection": {
     "type": "conicEqualArea",
     "parallels": [
@@ -45,7 +51,8 @@
             "title": "Share of adults (%)"
           }
         ]
-      }
+      },
+      "description": "Base map: every state drawn in grey from the TopoJSON file (shows 'no data' if a value were missing)"
     },
     {
       "data": {
@@ -91,10 +98,24 @@
           "as": "class"
         }
       ],
+      "params": [
+        {
+          "name": "pick",
+          "select": {
+            "type": "point",
+            "fields": [
+              "state_name"
+            ],
+            "on": "click",
+            "clear": false
+          }
+        }
+      ],
       "mark": {
         "type": "geoshape",
         "stroke": "white",
-        "strokeWidth": 1.2
+        "strokeWidth": 1.2,
+        "cursor": "pointer"
       },
       "encoding": {
         "color": {
@@ -102,29 +123,28 @@
           "type": "quantitative",
           "title": "Share of adults (%)",
           "scale": {
-            "type": "linear",
+            "type": "threshold",
             "domain": [
-              61.0,
-              72.8
+              62,
+              64,
+              66,
+              68
             ],
-            "scheme": {
-              "name": "blues",
-              "extent": [
-                0.15,
-                1
-              ]
-            }
+            "range": [
+              "#eff3ff",
+              "#bdd7e7",
+              "#6baed6",
+              "#3182bd",
+              "#08519c"
+            ]
           },
           "legend": {
             "orient": "bottom",
             "direction": "horizontal",
+            "type": "gradient",
             "gradientLength": 640,
             "gradientThickness": 14,
-            "values": [
-              61.0,
-              72.8
-            ],
-            "labelExpr": "format(datum.value, '.1f')",
+            "labelExpr": "isFinite(datum.value) ? datum.value + '%' : ''",
             "titleOrient": "top",
             "titleAnchor": "start"
           }
@@ -140,7 +160,29 @@
             "format": ".1f"
           }
         ]
-      }
+      },
+      "description": "Data layer: lookup joins the CSV to the map by state name, then colour = share of adults (lighter = lower); clicking a state stores it in the selection 'pick'"
+    },
+    {
+      "data": {
+        "url": "data/aus_states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "states"
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.properties.STATE_NAME == chosen"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "fill": null,
+        "stroke": "#1f2a30",
+        "strokeWidth": 2.5
+      },
+      "description": "Dark outline drawn on top for the state shown in chart 7 (param 'chosen', set by js/main.js)"
     },
     {
       "data": {
@@ -203,7 +245,8 @@
             "text": {
               "field": "lab"
             }
-          }
+          },
+          "description": "Callouts for the two leaders, placed in the ocean so they never cover the land"
         }
       ]
     }

@@ -130,7 +130,8 @@
             "format": ".1f"
           }
         ]
-      }
+      },
+      "description": "One cell per place and age group; darker blue = larger share of adults (no numbers in cells, details in the tooltip)"
     }
   ],
   "config": {

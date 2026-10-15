@@ -130,7 +130,8 @@
             "title": "Change (percentage points)"
           }
         ]
-      }
+      },
+      "description": "One line per activity from 2024 to 2025, same scale on both sides"
     },
     {
       "mark": {
@@ -145,7 +146,8 @@
           },
           "value": 25
         }
-      }
+      },
+      "description": "Dots at both ends"
     },
     {
       "transform": [
@@ -169,7 +171,8 @@
         "text": {
           "field": "lab"
         }
-      }
+      },
+      "description": "Labels with the 2025 value for the highlighted activities"
     },
     {
       "transform": [
@@ -189,7 +192,8 @@
           "type": "quantitative",
           "format": ".1f"
         }
-      }
+      },
+      "description": "Labels with the 2024 value for the highlighted activities"
     }
   ],
   "config": {

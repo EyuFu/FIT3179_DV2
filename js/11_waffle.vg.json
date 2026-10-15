@@ -100,7 +100,8 @@
             "title": "Share of adults (%)"
           }
         ]
-      }
+      },
+      "description": "10 by 10 grid: one square = 1% of adults, coloured by how often they are active"
     },
     {
       "transform": [
@@ -126,7 +127,8 @@
         "text": {
           "field": "lab"
         }
-      }
+      },
+      "description": "Label for group 1"
     },
     {
       "transform": [
@@ -152,7 +154,8 @@
         "text": {
           "field": "lab"
         }
-      }
+      },
+      "description": "Label for group 2"
     },
     {
       "transform": [
@@ -178,7 +181,8 @@
         "text": {
           "field": "lab"
         }
-      }
+      },
+      "description": "Label for group 3"
     },
     {
       "transform": [
@@ -204,7 +208,8 @@
         "text": {
           "field": "lab"
         }
-      }
+      },
+      "description": "Label for group 4"
     }
   ],
   "config": {

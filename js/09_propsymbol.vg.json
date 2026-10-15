@@ -27,7 +27,8 @@
         "fill": "#f7f6f2",
         "stroke": "#b9b9b9",
         "strokeWidth": 0.8
-      }
+      },
+      "description": "Base map of the states from the TopoJSON file"
     },
     {
       "data": {
@@ -145,7 +146,8 @@
             "title": "Stations per 100,000 people"
           }
         ]
-      }
+      },
+      "description": "One circle per state: circle area = number of stations (size scale starts at 0), colour = stations per 100,000 people; big circles drawn first"
     },
     {
       "data": {
@@ -204,7 +206,8 @@
             "text": {
               "field": "lab"
             }
-          }
+          },
+          "description": "Callouts for New South Wales and the Australian Capital Territory"
         }
       ]
     }

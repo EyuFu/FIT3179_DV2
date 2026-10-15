@@ -133,7 +133,8 @@
         "y2": {
           "field": "y1"
         }
-      }
+      },
+      "description": "One vertical axis per reason, all from 0% to 80%"
     },
     {
       "mark": {
@@ -172,7 +173,8 @@
             "title": "Share of active adults (%)"
           }
         ]
-      }
+      },
+      "description": "One line per age group; 55 to 64 dark, the rest grey"
     },
     {
       "transform": [
@@ -209,7 +211,8 @@
           },
           "value": 400
         }
-      }
+      },
+      "description": "Values of the highlighted age group on each axis"
     },
     {
       "transform": [
@@ -229,7 +232,8 @@
         "text": {
           "value": "55–64"
         }
-      }
+      },
+      "description": "Label naming the highlighted line"
     }
   ],
   "config": {

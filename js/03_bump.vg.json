@@ -136,7 +136,8 @@
         "y2": {
           "value": 330
         }
-      }
+      },
+      "description": "Grey vertical line marking the 2023 survey change (phone to online)"
     },
     {
       "data": {
@@ -165,7 +166,8 @@
             "changed"
           ]
         }
-      }
+      },
+      "description": "Label for the survey change"
     },
     {
       "mark": {
@@ -231,7 +233,8 @@
             "title": "Survey"
           }
         ]
-      }
+      },
+      "description": "One line per activity; y is rank, reversed so 1st is at the top; lines are not joined across 2023"
     },
     {
       "mark": {
@@ -264,7 +267,8 @@
           },
           "value": 22
         }
-      }
+      },
+      "description": "A dot for each year's rank"
     },
     {
       "transform": [
@@ -290,7 +294,8 @@
           },
           "value": "#7570b3"
         }
-      }
+      },
+      "description": "Activity names at the right end (highlighted lines only)"
     },
     {
       "data": {
@@ -323,7 +328,8 @@
         "text": {
           "value": "Pilates: 15th in 2016, 7th in 2025"
         }
-      }
+      },
+      "description": "Year labels for the two survey periods"
     },
     {
       "transform": [
@@ -342,7 +348,8 @@
         "text": {
           "field": "activity"
         }
-      }
+      },
+      "description": "Extra label for the running series"
     }
   ],
   "config": {

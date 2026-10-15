@@ -54,7 +54,8 @@
         "fill": "#ecebe7",
         "stroke": "white",
         "strokeWidth": 1
-      }
+      },
+      "description": "Base map of the states from the TopoJSON file"
     },
     {
       "data": {
@@ -118,7 +119,8 @@
             "title": "State or territory"
           }
         ]
-      }
+      },
+      "description": "One dot per mapped place; colour = outdoor station or gym"
     },
     {
       "data": {
@@ -156,7 +158,8 @@
         "text": {
           "field": "lab"
         }
-      }
+      },
+      "description": "Annotation about the empty inland areas"
     }
   ],
   "config": {

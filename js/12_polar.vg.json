@@ -118,7 +118,8 @@
             "text": {
               "field": "ring_lab"
             }
-          }
+          },
+          "description": "Labels for the rainfall reference rings"
         }
       ]
     },
@@ -136,7 +137,8 @@
         "theta": 0,
         "theta2": 6.2832,
         "radius": 39.6
-      }
+      },
+      "description": "Reference ring"
     },
     {
       "data": {
@@ -152,7 +154,8 @@
         "theta": 0,
         "theta2": 6.2832,
         "radius": 53.7
-      }
+      },
+      "description": "Reference ring"
     },
     {
       "data": {
@@ -168,7 +171,8 @@
         "theta": 0,
         "theta2": 6.2832,
         "radius": 74.3
-      }
+      },
+      "description": "Reference ring"
     },
     {
       "data": {
@@ -184,7 +188,8 @@
         "theta": 0,
         "theta2": 6.2832,
         "radius": 103.8
-      }
+      },
+      "description": "Reference ring"
     },
     {
       "mark": {
@@ -255,7 +260,8 @@
             "title": "Average maximum temperature (°C)"
           }
         ]
-      }
+      },
+      "description": "One wedge per month: wedge area = average rainfall (radius uses a square root), colour = average maximum temperature"
     },
     {
       "mark": {
@@ -278,7 +284,8 @@
         "text": {
           "field": "month_name"
         }
-      }
+      },
+      "description": "Month names around the outside"
     },
     {
       "transform": [
@@ -305,7 +312,8 @@
         "text": {
           "field": "lab"
         }
-      }
+      },
+      "description": "Annotation for the driest month"
     }
   ],
   "config": {

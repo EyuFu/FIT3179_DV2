@@ -117,7 +117,8 @@
             "format": ".1f"
           }
         ]
-      }
+      },
+      "description": "One person icon per 5 adults; each row is one place, the teal row is public spaces"
     },
     {
       "transform": [
@@ -157,7 +158,8 @@
           ],
           "value": "#5b6770"
         }
-      }
+      },
+      "description": "Percentage label at the end of each row"
     },
     {
       "transform": [
@@ -187,7 +189,8 @@
           },
           "value": "#5b6770"
         }
-      }
+      },
+      "description": "Place name at the start of each row"
     }
   ],
   "config": {

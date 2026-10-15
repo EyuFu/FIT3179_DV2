@@ -124,7 +124,8 @@
           "detail": {
             "field": "activity"
           }
-        }
+        },
+        "description": "Faint grey lines: the other nine activities, for comparison"
       },
       {
         "transform": [
@@ -146,7 +147,8 @@
           "y": {
             "value": 99
           }
-        }
+        },
+        "description": "Age label at the left end of the bottom row"
       },
       {
         "transform": [
@@ -168,7 +170,8 @@
           "y": {
             "value": 99
           }
-        }
+        },
+        "description": "Age label at the right end of the bottom row"
       },
       {
         "transform": [
@@ -216,7 +219,8 @@
               "title": "Share of adults (%)"
             }
           ]
-        }
+        },
+        "description": "The panel's own activity, drawn on top"
       },
       {
         "transform": [
@@ -245,7 +249,8 @@
             },
             "value": "#7570b3"
           }
-        }
+        },
+        "description": "Value label at the peak of the highlighted line"
       }
     ]
   },
