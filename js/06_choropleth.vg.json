@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 460,
+  "height": 330,
   "params": [
     {
       "name": "chosen",
@@ -17,7 +17,15 @@
     "rotate": [
       -132,
       0
-    ]
+    ],
+    "center": [
+      2,
+      -27.5
+    ],
+    "scale": 395,
+    "translate": {
+      "expr": "[width * 0.40, height * 0.45]"
+    }
   },
   "layer": [
     {
@@ -142,7 +150,7 @@
             "orient": "bottom",
             "direction": "horizontal",
             "type": "gradient",
-            "gradientLength": 640,
+            "gradientLength": 250,
             "gradientThickness": 14,
             "labelExpr": "isFinite(datum.value) ? datum.value + '%' : ''",
             "titleOrient": "top",
@@ -208,7 +216,7 @@
           "as": "value"
         },
         {
-          "calculate": "datum.state == 'TAS' ? 148.6 : 150.4",
+          "calculate": "datum.state == 'TAS' ? 148.6 : 151.7",
           "as": "lab_lon"
         },
         {
@@ -220,7 +228,10 @@
         {
           "transform": [
             {
-              "calculate": "datum.state == 'ACT' ? ['◀ Australian Capital', '    Territory ' + format(datum.value, '.0f') + '%'] : ['◀ ' + datum.state_name + ' ' + format(datum.value, '.0f') + '%']",
+              "filter": "datum.state == 'ACT'"
+            },
+            {
+              "calculate": "['Australian', 'Capital Territory', '◀ ' + format(datum.value, '.0f') + '%']",
               "as": "lab"
             }
           ],
@@ -228,7 +239,8 @@
             "type": "text",
             "align": "left",
             "baseline": "top",
-            "dy": -7,
+            "dy": -37,
+            "dx": 2,
             "fontSize": 12,
             "fontWeight": 600,
             "lineHeight": 15
@@ -246,7 +258,39 @@
               "field": "lab"
             }
           },
-          "description": "Callouts for the two leaders, placed in the ocean so they never cover the land"
+          "description": "Callout for the Australian Capital Territory, placed in the ocean"
+        },
+        {
+          "transform": [
+            {
+              "filter": "datum.state == 'TAS'"
+            },
+            {
+              "calculate": "'◀ Tasmania ' + format(datum.value, '.0f') + '%'",
+              "as": "lab"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "baseline": "middle",
+            "fontSize": 12,
+            "fontWeight": 600
+          },
+          "encoding": {
+            "longitude": {
+              "field": "lab_lon",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "lab_lat",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "lab"
+            }
+          },
+          "description": "Callout for Tasmania"
         }
       ]
     }
@@ -255,8 +299,8 @@
     "background": "#ffffff",
     "font": "Source Sans 3, Source Sans Pro, Helvetica, Arial, sans-serif",
     "padding": {
-      "left": 8,
-      "right": 90,
+      "left": 4,
+      "right": 4,
       "top": 8,
       "bottom": 8
     },
