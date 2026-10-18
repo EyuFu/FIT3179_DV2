@@ -78,9 +78,7 @@
   "layer": [
     {
       "mark": {
-        "type": "rect",
-        "stroke": "white",
-        "strokeWidth": 2
+        "type": "rect"
       },
       "encoding": {
         "color": {

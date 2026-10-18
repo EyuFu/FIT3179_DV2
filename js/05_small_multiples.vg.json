@@ -82,7 +82,7 @@
           "titleFontSize": 11,
           "titleFontWeight": 400,
           "titleColor": "#5b6770",
-          "titlePadding": 18
+          "titlePadding": 24
         }
       },
       "y": {
@@ -145,7 +145,7 @@
             "field": "age"
           },
           "y": {
-            "value": 99
+            "value": 114
           }
         },
         "description": "Age label at the left end of the bottom row"
@@ -168,7 +168,7 @@
             "field": "age"
           },
           "y": {
-            "value": 99
+            "value": 114
           }
         },
         "description": "Age label at the right end of the bottom row"

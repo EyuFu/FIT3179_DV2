@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 180,
-  "height": 180,
+  "width": 250,
+  "height": 250,
   "data": {
     "url": "data/ausplay2025_frequency.csv",
     "format": {
@@ -109,7 +109,7 @@
           "filter": "datum.order == 1 && datum.unit == 1"
         },
         {
-          "calculate": "format(datum.pct, '.0f') + '%  ' + datum.frequency",
+          "calculate": "[format(datum.pct, '.0f') + '%  ' + \"3 or more\", \"times a week\"]",
           "as": "lab"
         }
       ],
@@ -117,9 +117,10 @@
         "type": "text",
         "align": "left",
         "baseline": "middle",
-        "x": 188,
-        "y": 44,
+        "x": 258,
+        "y": 62,
         "fontSize": 12,
+        "lineHeight": 15,
         "fontWeight": 700,
         "color": "#1b9e77"
       },
@@ -136,7 +137,7 @@
           "filter": "datum.order == 2 && datum.unit == 1"
         },
         {
-          "calculate": "format(datum.pct, '.0f') + '%  ' + datum.frequency",
+          "calculate": "[format(datum.pct, '.0f') + '%  ' + \"Once or twice\", \"a week\"]",
           "as": "lab"
         }
       ],
@@ -144,9 +145,10 @@
         "type": "text",
         "align": "left",
         "baseline": "middle",
-        "x": 188,
-        "y": 103,
+        "x": 258,
+        "y": 147,
         "fontSize": 12,
+        "lineHeight": 15,
         "fontWeight": 400,
         "color": "#5b6770"
       },
@@ -163,7 +165,7 @@
           "filter": "datum.order == 3 && datum.unit == 1"
         },
         {
-          "calculate": "format(datum.pct, '.0f') + '%  ' + datum.frequency",
+          "calculate": "[format(datum.pct, '.0f') + '%  ' + \"Less than\", \"once a week\"]",
           "as": "lab"
         }
       ],
@@ -171,9 +173,10 @@
         "type": "text",
         "align": "left",
         "baseline": "middle",
-        "x": 188,
-        "y": 136,
+        "x": 258,
+        "y": 192,
         "fontSize": 12,
+        "lineHeight": 15,
         "fontWeight": 400,
         "color": "#5b6770"
       },
@@ -190,7 +193,7 @@
           "filter": "datum.order == 4 && datum.unit == 1"
         },
         {
-          "calculate": "format(datum.pct, '.0f') + '%  ' + datum.frequency",
+          "calculate": "[format(datum.pct, '.0f') + '%  ' + \"Not active in\", \"the past year\"]",
           "as": "lab"
         }
       ],
@@ -198,9 +201,10 @@
         "type": "text",
         "align": "left",
         "baseline": "middle",
-        "x": 188,
-        "y": 169,
+        "x": 258,
+        "y": 233,
         "fontSize": 12,
+        "lineHeight": 15,
         "fontWeight": 400,
         "color": "#5b6770"
       },
@@ -217,7 +221,7 @@
     "font": "Source Sans 3, Source Sans Pro, Helvetica, Arial, sans-serif",
     "padding": {
       "left": 4,
-      "right": 30,
+      "right": 4,
       "top": 8,
       "bottom": 8
     },

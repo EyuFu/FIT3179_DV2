@@ -191,7 +191,8 @@
         "align": "left",
         "dx": 7,
         "dy": -9,
-        "fontSize": 11
+        "fontSize": 11,
+        "fontWeight": 600
       },
       "encoding": {
         "text": {
@@ -203,13 +204,6 @@
             "value": "#1b9e77"
           },
           "value": "#1f2a30"
-        },
-        "fontWeight": {
-          "condition": {
-            "test": "datum.motivation == 'Being outdoors in nature'",
-            "value": 700
-          },
-          "value": 400
         }
       },
       "description": "Values of the highlighted age group on each axis"

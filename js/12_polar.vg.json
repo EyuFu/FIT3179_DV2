@@ -293,7 +293,7 @@
           "filter": "datum.mean_rainfall_mm == datum.min_rain"
         },
         {
-          "calculate": "['Driest month: ' + datum.month_name, format(datum.mean_rainfall_mm, '.0f') + (format(datum.mean_rainfall_mm, '.0f') == '1' ? ' millimetre' : ' millimetres') + ' of rain,', format(datum.mean_max_temp_c, '.0f') + '°C average maximum']",
+          "calculate": "['Driest month: ' + datum.month_name, format(datum.mean_rainfall_mm, '.0f') + (format(datum.mean_rainfall_mm, '.0f') == '1' ? ' millimetre' : ' millimetres') + ' of rain', format(datum.mean_max_temp_c, '.0f') + '°C average maximum']",
           "as": "lab"
         }
       ],
@@ -301,11 +301,13 @@
         "type": "text",
         "align": "left",
         "baseline": "top",
-        "fontSize": 12,
+        "fontSize": 11,
         "fontWeight": 600,
-        "lineHeight": 16,
+        "lineHeight": 14,
         "x": 0,
-        "y": 0,
+        "y": {
+          "expr": "height - 40"
+        },
         "color": "#1f2a30"
       },
       "encoding": {
